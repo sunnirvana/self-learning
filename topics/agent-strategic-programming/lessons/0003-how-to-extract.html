@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>第 03 课 · 对着那次对话抽方法</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+  <article class="page">
+    <nav class="crumbs">
+      <a href="../../index.html">校园</a>
+      ·
+      <a href="../index.html">本课</a>
+      ·
+      <a href="0002-extract-the-method.html">第 02 课</a>
+      ·
+      <a href="../reference/extract-prompt.html">提取提示原文</a>
+    </nav>
+
+    <header>
+      <p class="kicker">第 03 课 · 软件设计 → Agent</p>
+      <h1>对着那次对话抽方法</h1>
+      <p class="lede">第 02 课只说明了要切开。这节是操作：打开哪场对话、对 agent 说哪段话、抽出后删什么、下次怎么调用。</p>
+    </header>
+
+    <p class="win">这节做完你要能亲手走一遍：<strong>打开已经满意的那次对话 → 发出提取提示 → 把实例踢出方法 → 存成文件 → 下次只填新实例。</strong>现在不要做新的产品设计。</p>
+
+    <h2>你现在要做的事</h2>
+    <p>不是再写一份产品设计。是对着<strong>已经满意的那一次</strong>，加一场大约 10%–20% 时长的事后提取。这是 Ousterhout 说的被动投资：设计问题已经暴露（下次还得重写 prompt），现在修。<span class="sidenote">类比，不是原书。原概念见 <a href="https://web.stanford.edu/~ouster/cgi-bin/cs190-winter18/lecture.php?topic=working">Working Isn't Good Enough</a>。</span></p>
+
+    <ol class="steps">
+      <li>
+        <h3>打开已经满意的那次对话</h3>
+        <p>就在产出那份产品设计的会话里继续。不要新开空白会话从头描述「请帮我总结一个方法论」——上下文不在，agent 只能编一套通用设计课。</p>
+        <p>找不到旧对话时：把终稿，加上你还记得的要求，一并贴进新会话，然后立刻做第 2 步。仍然不要让它再设计一版。</p>
+      </li>
+      <li>
+        <h3>发出提取提示，禁止它再改稿</h3>
+        <p>复制下面整段，原样发出。它的工作变成：拆方法 / 这一次。不是继续优化那份设计。</p>
+        <div class="copy-block">
+          <pre id="extract-prompt">上面这次产品设计已经完成，不要再改那份稿，也不要再出一版新设计。
+
+请把这次工作拆成两部分：
+1. 方法：换一个完全不同的产品仍然成立的步骤、产出结构、质量线、禁止事项。
+2. 这一次：只属于当前这个产品的事实（名称、用户、约束、视觉、轶事）。
+
+方法只用下面五栏，每栏要短：
+- 何时用
+- 每次另给的输入
+- 每次应得到的产出
+- 步骤
+- 不要
+
+禁止把产品名、具体用户画像、视觉、个人轶事写进方法。
+写完后另列「我拿不准的条目」。</pre>
+          <button type="button" data-copy="extract-prompt">复制提取提示</button>
+        </div>
+      </li>
+      <li>
+        <h3>把混进方法的实例踢掉</h3>
+        <p>Agent 第一次抽，几乎总会把「这一次」写进方法。你的工作是逐条问：<strong>换一个产品，这句话还成立吗？</strong>不成立就踢回「每次另给的输入」，或直接删。</p>
+      </li>
+      <li>
+        <h3>存成你会再次打开的文件</h3>
+        <p>例如 <code>product-design.md</code>。不要把整次对话导出当方法。只要那五栏。如果你的 agent 支持技能文件，再把这五栏放进技能；先有一份能粘贴的 markdown 就够。</p>
+      </li>
+      <li>
+        <h3>下次只给方法和新实例</h3>
+        <p>新的一次产品设计，用下面这种开头。方法不再手写。</p>
+        <div class="copy-block">
+          <pre id="next-prompt">按「产品设计」方法做。方法如下：
+
+（在这里粘贴五栏）
+
+这一次的输入：
+- 想法：
+- 已知用户：
+- 硬约束：
+- 已否决的方向：</pre>
+          <button type="button" data-copy="next-prompt">复制下次调用</button>
+        </div>
+      </li>
+    </ol>
+
+    <h2>练：踢脏卡片</h2>
+    <p>下面假装是 agent 第一次抽出来的方法。逐条判断该留下还是踢出。选项字数相同。</p>
+
+    <div class="practice">
+      <div class="scene" data-answer="keep" data-why="换一个产品仍然成立。这是何时用，不是某个 App 的简介。">
+        <p class="meta">脏卡片 1 / 6</p>
+        <p class="prompt dirty-line">何时用：从想法做到可讨论的方案，而不是立刻写代码。</p>
+        <div class="choices row">
+          <button type="button" data-pick="keep">留下</button>
+          <button type="button" data-pick="kick">踢出</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="scene" data-answer="kick" data-why="某高校和五十元是这一次的事实。方法里只该写「每次另给：用户、预算」，不要写死数字。">
+        <p class="meta">脏卡片 2 / 6</p>
+        <p class="prompt dirty-line">输入：某高校学生，买教材预算五十元。</p>
+        <div class="choices row">
+          <button type="button" data-pick="keep">留下</button>
+          <button type="button" data-pick="kick">踢出</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="scene" data-answer="keep" data-why="产出结构下次还要。这正是你不想重写 prompt 的那部分。">
+        <p class="meta">脏卡片 3 / 6</p>
+        <p class="prompt dirty-line">产出：问题、用户、方案、取舍、下一步验证。</p>
+        <div class="choices row">
+          <button type="button" data-pick="keep">留下</button>
+          <button type="button" data-pick="kick">踢出</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="scene" data-answer="kick" data-why="室友和高数书是轶事。写进方法，下次做别的产品会变成噪音。">
+        <p class="meta">脏卡片 4 / 6</p>
+        <p class="prompt dirty-line">步骤：先从室友上周买高数书被坑讲起。</p>
+        <div class="choices row">
+          <button type="button" data-pick="keep">留下</button>
+          <button type="button" data-pick="kick">踢出</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="scene" data-answer="keep" data-why="「不要一上来就列功能」是质量线，对任何产品设计都有用。">
+        <p class="meta">脏卡片 5 / 6</p>
+        <p class="prompt dirty-line">不要：不要一上来就列功能。</p>
+        <div class="choices row">
+          <button type="button" data-pick="keep">留下</button>
+          <button type="button" data-pick="kick">踢出</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="scene" data-answer="kick" data-why="绿色 Logo 只属于那个标本产品。方法禁止写死视觉。">
+        <p class="meta">脏卡片 6 / 6</p>
+        <p class="prompt dirty-line">不要：不要改成绿色 Logo 以外的视觉。</p>
+        <div class="choices row">
+          <button type="button" data-pick="keep">留下</button>
+          <button type="button" data-pick="kick">踢出</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <h3>回忆两步</h3>
+
+      <div class="quiz">
+        <p class="meta">回忆 1 / 2</p>
+        <p class="prompt">提取方法时，优先打开哪场对话？</p>
+        <div class="choices">
+          <button type="button" data-correct="true" data-why="对。方法在那次已经满意的工作里，不在空白会话里。">打开已经满意的那次</button>
+          <button type="button" data-correct="false" data-why="空白会话没有那次的步骤和质量线，agent 只能编通用课。">新开一个空白的会话</button>
+          <button type="button" data-correct="false" data-why="教程里的方法不是你用过的方法。">去找一篇设计的教程</button>
+          <button type="button" data-correct="false" data-why="那是继续战术式：再做一份答卷，系统仍不变。">继续赶下一份设计稿</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="quiz">
+        <p class="meta">回忆 2 / 2</p>
+        <p class="prompt">发出提取提示之后，你要做的第一件事是？</p>
+        <div class="choices">
+          <button type="button" data-correct="true" data-why="对。第一次抽取几乎一定混进实例。换一个产品不成立的句子，都要踢掉。">把混入的实例细节删掉</button>
+          <button type="button" data-correct="false" data-why="提取提示已经禁止再改稿。再设计是战术式。">让它再写一版产品设计</button>
+          <button type="button" data-correct="false" data-why="整份对话当方法，是残留扮成投资。">把整份对话另行归档</button>
+          <button type="button" data-correct="false" data-why="方法还没存下来就开始下一份，投资被推走了。">开始做下一份产品设计</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <p class="score" data-score>答完会在这里计分。</p>
+    </div>
+
+    <div class="ask">
+      <p><strong>现在就做第 1–3 步，把五栏贴回来。</strong>打开那次产品设计对话，发出上面的提取提示，把拿不准的条目留着。不要先追求完美。我帮你踢实例。任何一步卡住，直接说卡在第几步。</p>
+    </div>
+
+    <section class="source">
+      <p><strong>主文献：</strong><a href="https://web.stanford.edu/~ouster/cgi-bin/cs190-winter18/lecture.php?topic=working">Working Isn't Good Enough</a> 里的持续小额投资、被动投资。步骤本身是类比，不是原书操作手册。</p>
+      <p>提取提示原文：<a href="../reference/extract-prompt.html">速查</a>。上一课：<a href="0002-extract-the-method.html">抽出下次还能用的方法</a>。</p>
+    </section>
+  </article>
+  <script src="../assets/practice.js"></script>
+  <script src="../assets/copy.js"></script>
+</body>
+</html>

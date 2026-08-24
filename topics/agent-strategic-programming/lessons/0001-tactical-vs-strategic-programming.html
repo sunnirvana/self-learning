@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>第 01 课 · 仅仅能工作是不够的</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+  <article class="page">
+    <nav class="crumbs">
+      <a href="../../index.html">校园</a>
+      ·
+      <a href="../index.html">本课</a>
+      ·
+      <a href="../reference/tactical-vs-strategic.html">速查：战术式 / 战略式</a>
+      ·
+      <a href="0002-extract-the-method.html">第 02 课</a>
+    </nav>
+
+    <header>
+      <p class="kicker">第 01 课 · 软件设计 → Agent</p>
+      <h1>仅仅能工作是不够的</h1>
+      <p class="lede">Ousterhout 说软件设计有两种工作方式。它们做的是同一类事——改系统、加功能——但<strong>首要目标</strong>相反。这个区分，可以直接用来看你怎么用 agent。</p>
+    </header>
+
+    <p class="win">这节课你要带走的只有一句：<strong>这次优化的是「当前能跑」，还是「以后更好改」？</strong>能对一次编码、一次 agent 操作立刻做出判断，这节就完成了。</p>
+
+    <h2>先把名字说准</h2>
+    <p>你听到的「战术性设计 / 战略性设计」，在原书里叫<strong>战术式编程</strong>和<strong>战略式编程</strong>。它们不是两个层次、也不是两种架构风格，而是同一次工作里的两种心态。<span class="sidenote">John Ousterhout，《A Philosophy of Software Design》第 3 章；讲义 <a href="https://web.stanford.edu/~ouster/cgi-bin/cs190-winter18/lecture.php?topic=working">Working Isn't Good Enough</a>。</span></p>
+
+    <h2>首要目标不同</h2>
+    <div class="pair">
+      <article>
+        <h3>战术式编程</h3>
+        <dl>
+          <dt>首要目标</dt>
+          <dd>让下一项功能或下一个 bug <em>能工作</em>。</dd>
+          <dt>允许什么</dt>
+          <dd>捷径、补丁、一点点额外复杂度——只要这次快。</dd>
+          <dt>结果</dt>
+          <dd>设计变差，复杂度升高。</dd>
+        </dl>
+      </article>
+      <article>
+        <h3>战略式编程</h3>
+        <dl>
+          <dt>首要目标</dt>
+          <dd>做出好设计，它<strong>碰巧也能工作</strong>。</dd>
+          <dt>真正在问</dt>
+          <dd>这段代码以后好不好演进？</dd>
+          <dt>做法</dt>
+          <dd>持续做小额投资，而不是一次设计完整个系统。</dd>
+        </dl>
+      </article>
+    </div>
+
+    <blockquote>
+      成为好设计师的第一步，是意识到仅仅能工作的代码是不够的。
+      <cite>Ousterhout，第 3 章</cite>
+    </blockquote>
+
+    <h2>战术为什么会输</h2>
+    <p>每一次捷径单独看都合理：截止时间在那儿，先让它跑起来。Ousterhout 的关键观察是：<strong>复杂度是增量的</strong>——不是某一个大错，而是几十、几百个小依赖和小隐晦堆出来的。堆到一定程度，清理要几个月，日程负担不起，于是继续打补丁。<span class="sidenote">复杂度的精确定义（变更放大、认知负荷、未知的未知）下一课再练。本课只需要记住：它是一点点堆的，堆上就很难拆。</span></p>
+
+    <figure>
+      <svg viewBox="0 0 640 270" role="img" aria-labelledby="fig-title fig-desc">
+        <title id="fig-title">战术式先快后慢，战略式先慢后快</title>
+        <desc id="fig-desc">两条曲线：战术式编程早期进展更快，随后趋平；战略式编程前期更慢，随后超过。</desc>
+        <rect width="640" height="270" fill="#fbf7ee"/>
+        <line x1="64" y1="28" x2="64" y2="222" stroke="#1c1915" stroke-width="1.2"/>
+        <line x1="64" y1="222" x2="600" y2="222" stroke="#1c1915" stroke-width="1.2"/>
+        <text x="18" y="128" fill="#5e574c" font-size="12" font-family="Palatino Linotype, Songti SC, serif" transform="rotate(-90 18 128)">进展</text>
+        <text x="318" y="252" fill="#5e574c" font-size="12" font-family="Palatino Linotype, Songti SC, serif">时间</text>
+        <path d="M80 200 C 170 70, 280 95, 560 118" fill="none" stroke="#8c1d18" stroke-width="2.4"/>
+        <path d="M80 200 C 210 175, 340 85, 560 46" fill="none" stroke="#1f5b32" stroke-width="2.4"/>
+        <circle cx="80" cy="200" r="3.2" fill="#1c1915"/>
+        <text x="430" y="150" fill="#8c1d18" font-size="14" font-family="Palatino Linotype, Songti SC, serif">战术式</text>
+        <text x="430" y="58" fill="#1f5b32" font-size="14" font-family="Palatino Linotype, Songti SC, serif">战略式</text>
+      </svg>
+      <figcaption>定性示意，不是测量。Ousterhout 写过：他不知道有谁能量出这两条精确曲线。交叉点他估计在大约 6–12 个月。</figcaption>
+    </figure>
+
+    <h2>投资多少，投在哪</h2>
+    <p>不是瀑布：不要企图一次设计完整个系统。系统会演化，第一次也设计不对，需求会变。正确做法是<strong>持续的小额投资</strong>，他给的量级是大约 <strong>10%–20%</strong> 的开发时间。<span class="sidenote">讲义原话：as much as you can afford；10–20% overhead；投资大约 6–12 个月回本。</span></p>
+    <ul class="tight">
+      <li><strong>主动投资</strong>：多花一点时间找更简单的设计，写清楚，想象系统可能往哪变。</li>
+      <li><strong>被动投资</strong>：发现设计错了，不要再打一层补丁，花额外时间修好。</li>
+    </ul>
+    <p>10%–20% 够小，不至于把日程打爆；够大，几个月后速度会反过来。到那时，过去的投资省下的时间，就能覆盖以后的投资。</p>
+
+    <h2>战术式飓风</h2>
+    <p>几乎每个组织都有至少一位把战术式编程发挥到极致的人：出活极快，管理层眼里的英雄，留下一串别人必须收拾的乱摊子。真正的英雄往往显得更慢——因为他们在还债。<span class="sidenote">原词 tactical tornado。中文常用「战术式飓风」。见第 3 章。</span></p>
+
+    <h2>迁到 agent：同一根尺子</h2>
+    <div class="analogy">
+      <p class="label">类比 · 不是原书内容</p>
+      <p>Ousterhout 没写过大模型。下面是把同一把尺子挪到 agent 上，要用你自己的使用来检验。</p>
+      <p>把「系统」看成两层：agent 正在改的代码，以及 agent 自己的工作方式（提示、技能、工具、记忆、约定）。战术式优化的是<strong>这一次对话的答卷</strong>；战略式优化的是<strong>下一次同类任务还好不好做</strong>。</p>
+    </div>
+    <div class="pair">
+      <article>
+        <h3>战术式用 agent</h3>
+        <p>提示能跑就交差。失败了就把日志整段贴回去。系统提示里越堆越多「注意不要……」。多开几个会话撞运气。</p>
+      </article>
+      <article>
+        <h3>战略式用 agent</h3>
+        <p>抽出可复用的技能。删掉一条制造隐晦的指令。把这次踩坑变成以后默认会避开的约定。主动拿出大约一到两成时间，改善 agent 的接口，而不只是追加提示。</p>
+      </article>
+    </div>
+    <p>Agent 里的「战术式飓风」长这样：特别能出活——并行很多会话、上下文塞得满满——但技能文件、工具和约定乱到你自己都不敢再交给它一件稍大的事。</p>
+
+    <h2>练：先分类，再回忆</h2>
+    <p>先判断下面四件事是战术式还是战略式。对了、错了都会立刻看到理由。选项字数相同，不要靠长短猜。</p>
+
+    <div class="practice">
+      <div class="scene" data-answer="tactical" data-why="首要目标是今晚能跑。把异常吞掉，会留下隐晦：以后的人不知道失败时会发生什么。">
+        <p class="meta">场景 1 / 4 · 代码</p>
+        <p class="prompt">截止时间很紧，把异常直接吞掉，日志里打一行 TODO。</p>
+        <div class="choices">
+          <button type="button" data-pick="tactical">战术式</button>
+          <button type="button" data-pick="strategic">战略式</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="scene" data-answer="strategic" data-why="多花的那一点时间，换的是以后更好演进。这是主动投资，不是把整个系统一次设计完。">
+        <p class="meta">场景 2 / 4 · 代码</p>
+        <p class="prompt">同样赶工，但先花十五分钟把错误变成明确的返回值。</p>
+        <div class="choices">
+          <button type="button" data-pick="tactical">战术式</button>
+          <button type="button" data-pick="strategic">战略式</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="scene" data-answer="tactical" data-why="当前对话也许能修好，系统提示却变成隐晦的垃圾场。这是用补丁堆复杂度。">
+        <p class="meta">场景 3 / 4 · Agent</p>
+        <p class="prompt">Agent 连续失败，你把越来越长的「注意……不要……」追加进系统提示。</p>
+        <div class="choices">
+          <button type="button" data-pick="tactical">战术式</button>
+          <button type="button" data-pick="strategic">战略式</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="scene" data-answer="strategic" data-why="投资落在以后每一次同类任务上。技能是 agent 的接口；接口变清楚，认知负荷才会下降。">
+        <p class="meta">场景 4 / 4 · Agent</p>
+        <p class="prompt">停下来，把反复出现的失败写成一条短技能：何时用、输入输出、禁止事项。</p>
+        <div class="choices">
+          <button type="button" data-pick="tactical">战术式</button>
+          <button type="button" data-pick="strategic">战略式</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <h3>不看上面，回忆四点</h3>
+
+      <div class="quiz">
+        <p class="meta">回忆 1 / 4</p>
+        <p class="prompt">战术式编程的首要目标是？</p>
+        <div class="choices">
+          <button type="button" data-correct="true" data-why="对。讲义原话：goal is to get the next feature or bug fix working。">尽快让下一项能工作</button>
+          <button type="button" data-correct="false" data-why="这是战略式编程的首要目标。战术式也希望代码能跑，但它优化的是这一次。">先做出可演进的设计</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="quiz">
+        <p class="meta">回忆 2 / 4</p>
+        <p class="prompt">战略式编程建议把多少时间持续投进设计？</p>
+        <div class="choices">
+          <button type="button" data-correct="true" data-why="对。大约 10%–20%，持续投入，而不是一次性的前期设计。">一到两成开发时间</button>
+          <button type="button" data-correct="false" data-why="太多。他给的量级是 10%–20%，好让日程仍能承受。">一半左右开发时间</button>
+          <button type="button" data-correct="false" data-why="太多。战略式不是把大部分时间都花在设计讨论上。">七成以上开发时间</button>
+          <button type="button" data-correct="false" data-why="这是瀑布。他明确反对一次设计完整个系统。">全部用于前期设计</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="quiz">
+        <p class="meta">回忆 3 / 4</p>
+        <p class="prompt">「战术式飓风」指的是谁？</p>
+        <div class="choices">
+          <button type="button" data-correct="true" data-why="对。出活极快，留下别人必须收拾的复杂度。">出活极快并留下一串混乱</button>
+          <button type="button" data-correct="false" data-why="那更像战略式的人，而且他们常常因此显得慢。">出活较慢但设计更加干净</button>
+          <button type="button" data-correct="false" data-why="收拾债务的人往往是飓风过后的受害者，不是飓风本人。">专门事后清理别人的债务</button>
+          <button type="button" data-correct="false" data-why="一次写完全部架构是瀑布，不是飓风。">先写完全部架构再写功能</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="quiz">
+        <p class="meta">回忆 4 / 4</p>
+        <p class="prompt">用到 agent 上，哪项更接近战略式编程？</p>
+        <div class="choices">
+          <button type="button" data-correct="true" data-why="对。技能是对以后的投资，不是只让这一次对话能跑。">抽出下次还能用的技能</button>
+          <button type="button" data-correct="false" data-why="这是补丁。当前也许能修好，系统更脏。">把失败日志整段贴回去</button>
+          <button type="button" data-correct="false" data-why="这是用更多尝试换这一次答卷，不改善系统。">多开几个会话并行试错</button>
+          <button type="button" data-correct="false" data-why="「能跑就交」正是战术式的首要目标。">只要提示能跑就交差</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <p class="score" data-score>答完会在这里计分。</p>
+    </div>
+
+    <h2>今天就能用</h2>
+    <p>下一次驱动 agent 之前，先问自己：<strong>我这 10%–20% 的精力，要花在改善系统上，还是只花在催这一次出结果？</strong>改善系统的最小动作通常是：抽一条技能、删一条含糊指令、把一个隐晦的失败变成明确约定。</p>
+
+    <div class="ask">
+      <p><strong>把最近一次真实用法带回给老师。</strong>贴一段你怎么用 agent 的过程（或一段你刚写的代码决策）。我会按这节的尺子标：战术式还是战略式，留下的是投资还是复杂度。任何一句不清楚的，直接问。</p>
+    </div>
+
+    <section class="source">
+      <p><strong>主文献（请先读这个，很短）：</strong> John Ousterhout，斯坦福 CS 190 讲义 <a href="https://web.stanford.edu/~ouster/cgi-bin/cs190-winter18/lecture.php?topic=working">Working Isn't Good Enough</a>。有书的话读《A Philosophy of Software Design》第 3 章。中文可对照 <a href="https://kyon.life/post/philosophy-of-software-design-3/">第 3 章笔记</a>，有出入以讲义和原书为准。</p>
+      <p>速查页：<a href="../reference/tactical-vs-strategic.html">战术式编程 vs 战略式编程</a>。</p>
+    </section>
+
+    <footer class="lesson-end">
+      <p>下一课：<a href="0002-extract-the-method.html">抽出下次还能用的方法</a>。你已经带回了「一次做完产品设计、下次还重写 prompt」的例子。</p>
+    </footer>
+  </article>
+  <script src="../assets/practice.js"></script>
+</body>
+</html>

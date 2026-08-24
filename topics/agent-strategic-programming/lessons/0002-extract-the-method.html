@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>第 02 课 · 抽出下次还能用的方法</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+  <article class="page">
+    <nav class="crumbs">
+      <a href="../../index.html">校园</a>
+      ·
+      <a href="../index.html">本课</a>
+      ·
+      <a href="0001-tactical-vs-strategic-programming.html">第 01 课</a>
+      ·
+      <a href="../reference/tactical-vs-strategic.html">速查</a>
+      ·
+      <a href="0003-how-to-extract.html">第 03 课 · 怎么操作</a>
+    </nav>
+
+    <header>
+      <p class="kicker">第 02 课 · 软件设计 → Agent</p>
+      <h1>抽出下次还能用的方法</h1>
+      <p class="lede">你已经能判断：产品设计一次做完、稿子满意、下次还得重写 prompt——这是战术式。这节只练最小的战略动作：把「这一次」和「下一次还要的方法」切开。</p>
+    </header>
+
+    <p class="win">带走的只有一件事：<strong>一次做完之后，立刻花大约 10%–20% 的时间，抽出下次不用重写的那部分。</strong>产出满意不是投资；能少写一次 prompt 才是。</p>
+
+    <h2>你的例子卡在哪</h2>
+    <p>战术式编程的首要目标是让下一项能工作。产品设计稿能用，说明这项已经「能工作」。Ousterhout 的句子正好套上来：<strong>仅仅能工作是不够的</strong>。<span class="sidenote">见 <a href="0001-tactical-vs-strategic-programming.html">第 01 课</a>；讲义 <a href="https://web.stanford.edu/~ouster/cgi-bin/cs190-winter18/lecture.php?topic=working">Working Isn't Good Enough</a>。</span></p>
+    <p>你缺的不是更好的一次答卷，而是系统里还没有一个可调用的「产品设计」方法。知识只活在那次对话里。下次同类工作，等于在没有模块的代码库里把同一段逻辑再手写一遍。</p>
+
+    <h2>第一次从零写，可以</h2>
+    <p>程序会持续演化：不能一次设计完整个系统，第一次也很难设计对，需求会变。所以<strong>第一次</strong>对着具体产品从零写 prompt，并不犯规——那时你还不知道方法长什么样。<span class="sidenote">讲义原文：Can't design the whole system at once; Can't get the design right the first time; Requirements change.</span></p>
+    <p>犯规的是：你现在已经看见「下次还要重写」，却仍然把抽出方法推到「下一份设计做完之后」。那就是 Ousterhout 说的滑坡——当前截止永远还有下一个。</p>
+
+    <div class="pair">
+      <article>
+        <h3>还在战术式</h3>
+        <p>先把这份稿再打磨完美。方法以后再说。下次仍从空白提示开始。</p>
+      </article>
+      <article>
+        <h3>最小战略动作</h3>
+        <p>稿子已经能用。停下来，切开实例与方法，写下下次只要填实例就能跑的卡片。</p>
+      </article>
+    </div>
+
+    <h2>切开的办法</h2>
+    <p>类比，不是原书：把一次成功的对话看成刚写完的代码。投资不是把整份对话存档，而是抽一个小模块。</p>
+    <ol class="tight">
+      <li><strong>命名会再次出现的工作</strong>：叫「产品设计」，不叫「这一份 App 的设计」。 </li>
+      <li><strong>逐条切开</strong>：下次换一个产品仍为真的，进方法；只属于这个产品的，留在这一次。</li>
+      <li><strong>方法只写接口</strong>：何时用、每次要提供什么、每次应得到什么结构、按什么步骤、什么不要做。</li>
+      <li><strong>整份对话不当方法</strong>：试错、跑偏、专属于这个产品的细节，留下只会增加隐晦。</li>
+    </ol>
+
+    <h2>先看一份混在一起的提示</h2>
+    <p>下面不是你的原文，是一份典型的「一次做完」提示。先读，再判断每条该进方法还是只属于这次。</p>
+    <div class="specimen">
+      <p class="label">标本 · 一次性提示</p>
+      <ol>
+        <li>帮我做一份产品设计：校园二手教材。</li>
+        <li>先写清要解决谁的什么问题，再谈功能。</li>
+        <li>用户是某高校学生，买教材预算五十元。</li>
+        <li>每个方案写明不做什么。</li>
+        <li>主色用校园绿，Logo 用一本打开的书。</li>
+        <li>这个想法来自室友上周买高数书被坑。</li>
+        <li>产出包括问题、用户、方案、取舍、下一步验证。</li>
+      </ol>
+    </div>
+
+    <div class="practice">
+      <div class="scene" data-answer="method" data-why="换一个产品仍然成立。这是方法里的步骤，不是这次的题材。">
+        <p class="meta">切开 1 / 5</p>
+        <p class="prompt">先写清要解决谁的什么问题，再谈功能。</p>
+        <div class="choices row">
+          <button type="button" data-pick="method">沉淀进方法</button>
+          <button type="button" data-pick="instance">只属于这次</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="scene" data-answer="instance" data-why="校园绿和打开的书只属于这个产品。下次做别的产品，这条会变成噪音。">
+        <p class="meta">切开 2 / 5</p>
+        <p class="prompt">主色用校园绿，Logo 用一本打开的书。</p>
+        <div class="choices row">
+          <button type="button" data-pick="method">沉淀进方法</button>
+          <button type="button" data-pick="instance">只属于这次</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="scene" data-answer="method" data-why="「写明不做什么」是质量线，对任何产品设计都有用。">
+        <p class="meta">切开 3 / 5</p>
+        <p class="prompt">每个方案写明不做什么。</p>
+        <div class="choices row">
+          <button type="button" data-pick="method">沉淀进方法</button>
+          <button type="button" data-pick="instance">只属于这次</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="scene" data-answer="instance" data-why="用户和预算是这一次的输入。方法里只该写「每次要提供用户与约束」，不要写死某校、五十元。">
+        <p class="meta">切开 4 / 5</p>
+        <p class="prompt">用户是某高校学生，买教材预算五十元。</p>
+        <div class="choices row">
+          <button type="button" data-pick="method">沉淀进方法</button>
+          <button type="button" data-pick="instance">只属于这次</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="scene" data-answer="residue" data-why="这是战术残留扮成投资。整份对话充满实例和试错，下次读它的认知负荷很高，也不知道哪些还算数。">
+        <p class="meta">切开 5 / 5</p>
+        <p class="prompt">把这次从草稿到终稿的全部对话导出，下次整份丢给 agent。</p>
+        <div class="choices row">
+          <button type="button" data-pick="invest">战略投资</button>
+          <button type="button" data-pick="residue">战术残留</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <h3>不看上面，回忆三点</h3>
+
+      <div class="quiz">
+        <p class="meta">回忆 1 / 3</p>
+        <p class="prompt">产出已经满意，为什么仍可能是战术式？</p>
+        <div class="choices">
+          <button type="button" data-correct="true" data-why="对。战术式的首要目标就是让这一项能工作。满意的稿子不自动改善下次。">系统没有变得更好改</button>
+          <button type="button" data-correct="false" data-why="质量高低不是这把尺子。战术式完全可以交出满意的产出。">产出质量还是不够高</button>
+          <button type="button" data-correct="false" data-why="快慢也不是这把尺子。战术式往往还更快。">这一次用时仍然太长</button>
+          <button type="button" data-correct="false" data-why="把提示写长常常是在堆这一次的补丁，不是投资。">提示词仍然写得不够</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="quiz">
+        <p class="meta">回忆 2 / 3</p>
+        <p class="prompt">第一次做产品设计、从零写提示，这件事本身？</p>
+        <div class="choices">
+          <button type="button" data-correct="true" data-why="对。第一次很难把设计做对。战略式要求的是看见重复之后立刻投资，不是一开始就做完整个体系。">首次从零写是可接受的</button>
+          <button type="button" data-correct="false" data-why="每次重写，系统永远不会出现可调用的方法。">每次重写才是正确做法</button>
+          <button type="button" data-correct="false" data-why="那是瀑布：一次设计完整个系统。Ousterhout 明确反对。">开始前必须先搭好框架</button>
+          <button type="button" data-correct="false" data-why="同样是瀑布。投资是持续的小额，大约一到两成。">开始前必须写完全体系</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="quiz">
+        <p class="meta">回忆 3 / 3</p>
+        <p class="prompt">已经发现下次还要重写同一类 prompt。战略式动作是？</p>
+        <div class="choices">
+          <button type="button" data-correct="true" data-why="对。这是被动投资：设计问题已经暴露，现在修，不要等下一个截止。">立刻抽出可再用方法</button>
+          <button type="button" data-correct="false" data-why="再打磨的是这一次的答卷。当前截止后面几乎总有下一个。">先把当前稿再打磨完</button>
+          <button type="button" data-correct="false" data-why="更多会话只是催这一次出结果。">多开几个会话重新试</button>
+          <button type="button" data-correct="false" data-why="整段回贴是补丁，会把实例和试错一起留下。">把旧对话整段贴回去</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <p class="score" data-score>答完会在这里计分。</p>
+    </div>
+
+    <h2>抽出后长这样</h2>
+    <p>方法卡片要短，只放下次仍为真的接口。实例事实每次另给。</p>
+    <div class="method-card">
+      <h3>产品设计</h3>
+      <dl>
+        <dt>何时用</dt>
+        <dd>要从一个想法做到可讨论的产品方案，而不是立刻写代码或画视觉。</dd>
+        <dt>每次另给的输入</dt>
+        <dd>想法、已知用户、硬约束、已否决的方向。</dd>
+        <dt>每次应得到的产出</dt>
+        <dd>问题、用户、方案、取舍（含不做什么）、下一步验证。</dd>
+        <dt>步骤</dt>
+        <dd>先问题再功能；每个方案写明不做什么；用验证步骤收尾，不把愿景写成计划。</dd>
+        <dt>不要</dt>
+        <dd>不要把某一次的品牌、配色、个人轶事写进方法；不要把整次对话当方法。</dd>
+      </dl>
+    </div>
+    <p>上面是标本抽出来的样子，不是给你用的最终技能。你的产品设计方法，必须从你已经满意的那一次里抽——那里才有你真正用过的步骤和质量线。</p>
+
+    <div class="ask">
+      <p><strong>把你那次产品设计切开，带回给老师。</strong>按这五栏写一版（何时用 / 每次另给的输入 / 每次应得到的产出 / 步骤 / 不要）。不确定的条目标出来。我帮你看：哪些还是「这一次」，哪些已经能当方法。任何一句不清楚的，直接问。</p>
+    </div>
+
+    <section class="source">
+      <p><strong>主文献：</strong>同一份讲义 <a href="https://web.stanford.edu/~ouster/cgi-bin/cs190-winter18/lecture.php?topic=working">Working Isn't Good Enough</a>——尤其是「不能一次设计完」「第一次很难对」和持续 10%–20% 投资。中文对照 <a href="https://kyon.life/post/philosophy-of-software-design-3/">第 3 章笔记</a> 里主动投资 / 被动投资两段。</p>
+      <p>上一课：<a href="0001-tactical-vs-strategic-programming.html">仅仅能工作是不够的</a>。速查：<a href="../reference/tactical-vs-strategic.html">战术式 / 战略式</a>。</p>
+    </section>
+
+    <footer class="lesson-end">
+      <p>不知道怎么动手？下一课是操作清单：<a href="0003-how-to-extract.html">对着那次对话抽方法</a>。</p>
+    </footer>
+  </article>
+  <script src="../assets/practice.js"></script>
+</body>
+</html>

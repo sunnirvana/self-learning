@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>速查 · 战术式编程 vs 战略式编程</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+  <article class="page">
+    <nav class="crumbs">
+      <a href="../../index.html">校园</a>
+      ·
+      <a href="../index.html">本课</a>
+      ·
+      <a href="../lessons/0001-tactical-vs-strategic-programming.html">第 01 课</a>
+      ·
+      <a href="../lessons/0002-extract-the-method.html">第 02 课</a>
+    </nav>
+
+    <header>
+      <p class="kicker">Reference</p>
+      <h1>战术式编程 vs 战略式编程</h1>
+      <p class="lede">Ousterhout 第 3 章的压缩版。判断时只问首要目标：当前能跑，还是以后更好改。</p>
+    </header>
+
+    <div class="pair">
+      <article>
+        <h3>战术式编程</h3>
+        <dl>
+          <dt>首要目标</dt>
+          <dd>让下一项功能或 bug 能工作。</dd>
+          <dt>允许</dt>
+          <dd>捷径和补丁，只要这次快。</dd>
+          <dt>留下什么</dt>
+          <dd>增量复杂度：小依赖 + 小隐晦。</dd>
+          <dt>短期</dt>
+          <dd>更快。</dd>
+          <dt>几个月后</dt>
+          <dd>越改越慢。</dd>
+        </dl>
+      </article>
+      <article>
+        <h3>战略式编程</h3>
+        <dl>
+          <dt>首要目标</dt>
+          <dd>好设计，碰巧也能工作。</dd>
+          <dt>真正在问</dt>
+          <dd>以后好不好演进？</dd>
+          <dt>留下什么</dt>
+          <dd>对系统的小额投资。</dd>
+          <dt>短期</dt>
+          <dd>慢大约 10%–20%。</dd>
+          <dt>几个月后</dt>
+          <dd>投资回本，之后的投资接近免费。</dd>
+        </dl>
+      </article>
+    </div>
+
+    <h2>投资</h2>
+    <ul class="tight">
+      <li>量级：大约 10%–20% 的开发时间，持续，不是瀑布。</li>
+      <li>主动：多花时间找更简单的设计；写清楚；预想可能的变化。</li>
+      <li>被动：发现设计问题就修，不打第二层补丁。</li>
+      <li>不能一次设计完整个系统；第一次也对不准；需求会变。</li>
+    </ul>
+
+    <h2>战术式飓风</h2>
+    <p>出活极快、常被当成英雄、留下别人必须收拾的乱摊子。还债的人显得更慢。</p>
+
+    <h2>一句判断</h2>
+    <p class="win">这次优化的是「当前能跑」，还是「以后更好改」？</p>
+
+    <h2>一次做完之后</h2>
+    <ul class="tight">
+      <li>产出满意仍可能是战术式：下次还要重写 prompt，系统就没有更好改。</li>
+      <li>第一次从零写可以（设计第一次很难对）。看见重复还不抽，才是继续战术式。</li>
+      <li>最小投资：切开「下次仍为真的方法」和「只属于这一次的实例」。</li>
+      <li>整份对话存档不是投资，是残留。</li>
+    </ul>
+    <p>方法卡片五栏：何时用 / 每次另给的输入 / 每次应得到的产出 / 步骤 / 不要。详见 <a href="../lessons/0002-extract-the-method.html">第 02 课</a>。</p>
+
+    <h2>迁到 agent（类比，非原书）</h2>
+    <div class="analogy">
+      <p class="label">类比 · 不是原书内容</p>
+      <p>系统有两层：agent 正在改的代码，以及 agent 自己的工作方式（提示、技能、工具、记忆、约定）。</p>
+    </div>
+    <div class="pair">
+      <article>
+        <h3>战术式</h3>
+        <p>催这一次答卷：整段贴日志、追加「不要……」、多开会话撞运气、提示能跑就交。</p>
+      </article>
+      <article>
+        <h3>战略式</h3>
+        <p>改善以后还能用的接口：抽技能、删含糊指令、把隐晦失败变成约定。拿出大约一到两成时间做这件事。</p>
+      </article>
+    </div>
+
+    <section class="source">
+      <p>来源：<a href="https://web.stanford.edu/~ouster/cgi-bin/cs190-winter18/lecture.php?topic=working">CS 190 讲义</a>；《A Philosophy of Software Design》第 3 章。课：<a href="../lessons/0001-tactical-vs-strategic-programming.html">第 01 课</a>。</p>
+    </section>
+  </article>
+</body>
+</html>
