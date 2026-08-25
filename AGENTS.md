@@ -17,6 +17,7 @@ Campus layout and GitHub habits: [CAMPUS.md](CAMPUS.md). Course map: [README.md]
 - New course → copy `_template/`, fill `MISSION.md` before the first lesson.
 - Shared CSS/JS → lift into `shared/assets/` only when a second course actually needs the same file.
 
-## Course in progress
+## Courses
 
-`topics/agent-strategic-programming/` — tactical vs strategic programming for agents. Next: user extracts a product-design method into `methods/`.
+- `topics/photo-to-print/` — photo → mesh → repair → FDM figurine/ornament. Active when user asks about 3D printing / modeling from photos.
+- `topics/agent-strategic-programming/` — tactical vs strategic programming for agents. Next: extract product-design method into `methods/`.

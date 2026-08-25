@@ -1,0 +1,528 @@
+/* Shared course stylesheet. Every lesson and reference page links this. */
+
+:root {
+  --bg: #f4efe4;
+  --paper: #fbf7ee;
+  --ink: #1c1915;
+  --muted: #5e574c;
+  --rule: #d8cfc0;
+  --accent: #8c1d18;
+  --accent-soft: #f0e2d0;
+  --ok: #1f5b32;
+  --ok-soft: #dce9de;
+  --bad: #8c1d18;
+  --bad-soft: #f3ddd8;
+  --measure: 42rem;
+  --font-serif: "Palatino Linotype", Palatino, "Iowan Old Style", "Songti SC", "STSong", "Noto Serif SC", "Source Han Serif SC", SimSun, serif;
+  --font-sans: "Segoe UI", "Helvetica Neue", "Microsoft YaHei UI", "Noto Sans SC", sans-serif;
+  --font-mono: "Cascadia Mono", "Sarasa Mono SC", "Source Code Pro", Consolas, monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 19px;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(1200px 400px at 10% -10%, #fffaf1 0%, transparent 50%),
+    var(--bg);
+  color: var(--ink);
+  font-family: var(--font-serif);
+  line-height: 1.7;
+  text-rendering: optimizeLegibility;
+}
+
+.page {
+  position: relative;
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 2.5rem 1.4rem 5rem;
+}
+
+@media (min-width: 72rem) {
+  .page {
+    margin-left: max(1.5rem, calc(50vw - 28rem));
+  }
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  background: var(--accent-soft);
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+}
+
+h1 {
+  margin: 0.2rem 0 1rem;
+  font-size: 2.05rem;
+}
+
+h2 {
+  margin: 2.4rem 0 0.7rem;
+  font-size: 1.25rem;
+  color: var(--accent);
+}
+
+h3 {
+  margin: 1.6rem 0 0.5rem;
+  font-size: 1.05rem;
+}
+
+p,
+li {
+  margin: 0.7rem 0;
+}
+
+.kicker {
+  margin: 0;
+  color: var(--accent);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.lede {
+  font-size: 1.12rem;
+  color: var(--muted);
+}
+
+.win {
+  margin: 1.4rem 0 2rem;
+  padding: 0.9rem 1rem 0.9rem 1.1rem;
+  border-left: 3px solid var(--accent);
+  background: var(--paper);
+}
+
+.win strong {
+  color: var(--accent);
+}
+
+.sidenote {
+  display: block;
+  margin: 0.4rem 0 1rem;
+  padding-left: 0.85rem;
+  border-left: 1px solid var(--rule);
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+@media (min-width: 72rem) {
+  .sidenote {
+    position: absolute;
+    right: -19.5rem;
+    width: 17.5rem;
+    margin: 0;
+    padding-left: 0.9rem;
+  }
+}
+
+blockquote {
+  margin: 1.4rem 0;
+  padding: 0.2rem 0 0.2rem 1.1rem;
+  border-left: 2px solid var(--ink);
+  font-style: italic;
+}
+
+blockquote cite {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-style: normal;
+}
+
+.pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  margin: 1.2rem 0 1.6rem;
+}
+
+.pair article {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 0.95rem 1rem 1.1rem;
+}
+
+.pair h3 {
+  margin-top: 0;
+  font-size: 0.95rem;
+}
+
+.pair article:first-child {
+  border-top: 3px solid var(--bad);
+}
+
+.pair article:last-child {
+  border-top: 3px solid var(--ok);
+}
+
+.pair dt {
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  margin-top: 0.7rem;
+}
+
+.pair dd {
+  margin: 0.15rem 0 0;
+}
+
+@media (max-width: 40rem) {
+  .pair {
+    grid-template-columns: 1fr;
+  }
+}
+
+figure {
+  margin: 1.6rem 0 1.2rem;
+}
+
+figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+}
+
+figcaption {
+  margin-top: 0.45rem;
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+}
+
+.analogy {
+  margin: 1.4rem 0;
+  padding: 1rem 1.1rem;
+  background: var(--accent-soft);
+  border: 1px solid #e2d0b6;
+}
+
+.analogy .label {
+  margin: 0 0 0.4rem;
+  color: var(--accent);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.ask {
+  margin: 2rem 0 0;
+  padding: 1rem 1.1rem;
+  background: var(--paper);
+  border: 1px dashed var(--rule);
+}
+
+.source {
+  margin-top: 2.4rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+}
+
+nav.crumbs {
+  margin-bottom: 1.6rem;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+}
+
+nav.crumbs a {
+  color: var(--muted);
+}
+
+ol.tight,
+ul.tight {
+  padding-left: 1.2rem;
+}
+
+ol.tight li,
+ul.tight li {
+  margin: 0.35rem 0;
+}
+
+/* Practice widgets */
+
+.practice {
+  margin: 1.2rem 0 1.8rem;
+}
+
+.quiz,
+.scene {
+  margin: 0.9rem 0;
+  padding: 1rem 1rem 1.05rem;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+}
+
+.quiz .prompt,
+.scene .prompt {
+  margin: 0 0 0.8rem;
+  font-size: 1.02rem;
+}
+
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.choices.row {
+  flex-direction: row;
+}
+
+.choices.row button {
+  flex: 1;
+  text-align: center;
+}
+
+.choices button {
+  appearance: none;
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--rule);
+  background: #fff;
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: 0.98rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.choices button:hover:not(:disabled) {
+  border-color: var(--ink);
+}
+
+.choices button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.choices button[data-state="right"] {
+  background: var(--ok-soft);
+  border-color: var(--ok);
+}
+
+.choices button[data-state="wrong"] {
+  background: var(--bad-soft);
+  border-color: var(--bad);
+}
+
+.choices button:disabled {
+  cursor: default;
+}
+
+.feedback {
+  margin: 0.75rem 0 0;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+}
+
+.feedback[hidden] {
+  display: none;
+}
+
+.feedback.is-right {
+  color: var(--ok);
+}
+
+.feedback.is-wrong {
+  color: var(--bad);
+}
+
+.score {
+  margin-top: 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+}
+
+.meta {
+  margin: 0 0 0.45rem;
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+}
+
+footer.lesson-end {
+  margin-top: 2.5rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.specimen {
+  margin: 1.1rem 0 1.4rem;
+  padding: 0.95rem 1.05rem;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  font-size: 0.92rem;
+}
+
+.specimen .label {
+  margin: 0 0 0.45rem;
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.specimen ol {
+  margin: 0.2rem 0 0;
+  padding-left: 1.2rem;
+}
+
+.specimen li {
+  margin: 0.28rem 0;
+}
+
+.method-card {
+  margin: 1.1rem 0 1.4rem;
+  padding: 0.2rem 1.05rem 0.9rem;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--ok);
+}
+
+.method-card h3 {
+  margin-bottom: 0.2rem;
+}
+
+.method-card dt {
+  margin-top: 0.7rem;
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+}
+
+.method-card dd {
+  margin: 0.15rem 0 0;
+}
+
+.steps {
+  margin: 1.1rem 0 1.5rem;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.steps > li {
+  position: relative;
+  margin: 0 0 1rem;
+  padding: 0.85rem 1rem 0.95rem 3rem;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+}
+
+.steps > li::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  left: 0.85rem;
+  top: 0.9rem;
+  color: var(--accent);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.steps h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+  color: var(--ink);
+}
+
+.copy-block {
+  position: relative;
+  margin: 0.8rem 0 0.2rem;
+}
+
+.copy-block pre {
+  margin: 0;
+  padding: 0.85rem 1rem 2.4rem;
+  overflow: auto;
+  background: #221e18;
+  color: #f4efe4;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+
+.copy-block button {
+  appearance: none;
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  padding: 0.25rem 0.55rem;
+  border: 1px solid #8a7d6b;
+  background: #3a342b;
+  color: #f4efe4;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.copy-block button:hover {
+  border-color: #f4efe4;
+}
+
+.dirty-line {
+  font-size: 0.95rem;
+}
+
+@media print {
+  body {
+    background: #fff;
+    font-size: 12pt;
+  }
+
+  .choices button {
+    border-color: #bbb;
+  }
+
+  .feedback {
+    display: block !important;
+    color: var(--ink) !important;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .page {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+}

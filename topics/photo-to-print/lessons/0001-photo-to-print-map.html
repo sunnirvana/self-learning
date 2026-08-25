@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>第 01 课 · 照片到打印的地图</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+  <article class="page">
+    <nav class="crumbs">
+      <a href="../../../index.html">校园</a>
+      ·
+      <a href="../index.html">本课</a>
+      ·
+      <a href="../reference/pipeline-map.html">速查：流水线</a>
+    </nav>
+
+    <header>
+      <p class="kicker">第 01 课 · 照片 → FDM</p>
+      <h1>照片到打印的地图</h1>
+      <p class="lede">你会打别人的模型。接下来要自己出模。先不要埋进某个 App：先看清整条路，以及路上的两个岔口——<strong>AI 出模</strong>和<strong>摄影测量</strong>。</p>
+    </header>
+
+    <p class="win">带走三件事：<strong>① 六步流水线；② AI 是预测、摄影测量是测量；③ FDM 上机前至少要过「流形」这一关。</strong>能给自己下一件摆件选对岔口，这节就完成了。</p>
+
+    <h2>你已经会的，和还缺的</h2>
+    <p>切片、上机、换料——这些你在打现成模型时已经练过。缺的是中间那段：从照片得到一个<strong>可以修、可以打</strong>的网格，而不是一个只能在网页里转一转的漂亮预览。</p>
+
+    <h2>六步流水线</h2>
+    <ol class="steps">
+      <li>
+        <h3>选物件</h3>
+        <p>手办 / 小摆件：尺寸适中、表面别太反光、能转着拍到大部分面。功能件、卡扣先不要——那是另一条路。</p>
+      </li>
+      <li>
+        <h3>拍照</h3>
+        <p>一张或几张不同角度。拍得越好，后面越省事；但再好的照片也过不了「可打印性」检查这一关。</p>
+      </li>
+      <li>
+        <h3>出模</h3>
+        <p>软件吐出网格（常见 STL / OBJ / GLB）。这里有两条技术岔路，见下一节。</p>
+      </li>
+      <li>
+        <h3>检查可打印性</h3>
+        <p>拖进你的切片软件。它抱怨 non-manifold、破面、空壳——这很正常，尤其是 AI 出来的模型。</p>
+      </li>
+      <li>
+        <h3>修补与定尺</h3>
+        <p>补洞、做流形、设真实毫米尺寸、必要时加底座。下一课起会练具体动作。</p>
+      </li>
+      <li>
+        <h3>切片并打印</h3>
+        <p>你熟悉的阶段。用预览确认没有乱飘的碎面，再开始打。</p>
+      </li>
+    </ol>
+
+    <h2>岔口：AI 出模 vs 摄影测量</h2>
+    <p>名字都叫「用照片变 3D」，机制完全不同。<span class="sidenote">对照阅读：<a href="https://higen3d.com/blog/ai-3d-vs-photogrammetry-2026">AI vs Photogrammetry (2026)</a>；AI 开源基线见 <a href="https://arxiv.org/abs/2403.02151">TripoSR</a>。</span></p>
+
+    <div class="pair">
+      <article>
+        <h3>AI 出模</h3>
+        <dl>
+          <dt>在做什么</dt>
+          <dd>根据训练过的海量模型，<strong>预测</strong>一个说得通的立体形状。没拍到的背面，它会「脑补」。</dd>
+          <dt>照片需求</dt>
+          <dd>一张就能试；几张不同角度（多视角）通常更稳。</dd>
+          <dt>擅长</dt>
+          <dd>快；只有少量参考图；手办、摆件这种「像那么回事」即可。</dd>
+          <dt>风险</dt>
+          <dd>背面可能编错；尺寸无意义；网格常有破洞，不能直接当精密件。</dd>
+        </dl>
+      </article>
+      <article>
+        <h3>摄影测量</h3>
+        <dl>
+          <dt>在做什么</dt>
+          <dd>在多张重叠照片里找同一特征点，<strong>测量</strong>可见表面。相机没看到的地方，它补不出来。</dd>
+          <dt>照片需求</dt>
+          <dd>往往几十上百张，重叠要够，光照要匀。</dd>
+          <dt>擅长</dt>
+          <dd>更接近真实外形；你手边有实物、能转着拍时。</dd>
+          <dt>风险</dt>
+          <dd>慢；反光 / 透明 / 无纹理物体容易翻车；网格又密又脏，仍要修。</dd>
+        </dl>
+      </article>
+    </div>
+
+    <blockquote>
+      AI 预测；摄影测量重建可见表面。两者都能导出网格，但「像」和「准」不是一回事。
+      <cite>综合 2026 年常见对照说法；机制上以 TripoSR 一类前馈重建为 AI 侧代表</cite>
+    </blockquote>
+
+    <h2>给你的推荐起点</h2>
+    <div class="analogy">
+      <p class="label">路径建议 · 按你的选择</p>
+      <p>目标是手办摆件、FDM、尽快打出第一件：先走<strong>多视角 / 图像 AI 出模</strong>（例如 Meshy 一类支持多图的服务）拿到网格，立刻进切片软件看它骂什么，再学修补。开源单图基线是 <a href="https://huggingface.co/spaces/stabilityai/TripoSR">TripoSR Demo</a>，适合理解原理，不保证「一键可打」。</p>
+      <p>若实物就在桌上、你愿意拍很多张重叠照片，摄影测量（如 Meshroom / 手机扫描类 App）往往更像本尊——但仍要修网格。</p>
+    </div>
+
+    <h2>FDM 上机前：流形</h2>
+    <p>打印机和切片软件要的是一个<strong>封闭的实心壳</strong>：没有破洞，每条边正好连着两张面。这叫流形（manifold），也常说 watertight。<span class="sidenote">Prusa：《<a href="https://help.prusa3d.com/article/modeling-with-3d-printing-in-mind_164135">Modeling with 3D printing in mind</a>》。</span></p>
+    <p>AI 和扫描结果经常不流形。所以流水线里「检查 → 修补」不是可选装饰，而是主菜。屏幕上看着完整，不等于切片软件认为它是一个物体。</p>
+
+    <h2>练：选路与抓重点</h2>
+    <div class="practice">
+      <div class="scene" data-answer="ai" data-why="只有一张网图、看不到背面 → AI 会预测未见部分。摄影测量无法凭空测量没拍到的面。">
+        <p class="meta">场景 1 / 3</p>
+        <p class="prompt">只有一张手办的网图，想尽快得到能转着看的立体草稿。</p>
+        <div class="choices row">
+          <button type="button" data-pick="ai">偏向AI出模</button>
+          <button type="button" data-pick="photo">偏向摄影测量</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="scene" data-answer="photo" data-why="实物在手、能拍很多重叠照片、要更像本尊 → 摄影测量更合适。AI 仍可能脑补错细节。">
+        <p class="meta">场景 2 / 3</p>
+        <p class="prompt">桌上有一个哑光小雕像，可以转着拍几十张，要尽量像原件。</p>
+        <div class="choices row">
+          <button type="button" data-pick="ai">偏向AI出模</button>
+          <button type="button" data-pick="photo">偏向摄影测量</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="scene" data-answer="repair" data-why="出模只是第三步。切片报错说明还没通过可打印性；下一步是修补流形，不是直接按打印。">
+        <p class="meta">场景 3 / 3</p>
+        <p class="prompt">AI 导出了 STL，切片软件提示 non-manifold。你该先做什么？</p>
+        <div class="choices">
+          <button type="button" data-pick="print">直接切片开打</button>
+          <button type="button" data-pick="repair">先修补再检查</button>
+          <button type="button" data-pick="reshoot">扔掉改去手雕</button>
+          <button type="button" data-pick="ignore">忽略提示继续</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="quiz">
+        <p class="meta">回忆 1 / 3</p>
+        <p class="prompt">AI 出模对没拍到的背面通常会怎样？</p>
+        <div class="choices">
+          <button type="button" data-correct="true" data-why="对。它按训练先验预测一个说得通的背面，不一定等于实物。">按经验预测补上</button>
+          <button type="button" data-correct="false" data-why="摄影测量才会坚持「没看到就没有」。">留成空洞等再拍</button>
+          <button type="button" data-correct="false" data-why="测量需要多张重叠照片里的同一特征点。">用卡尺去量尺寸</button>
+          <button type="button" data-correct="false" data-why="镜像只是一种粗糙启发式，不是 AI 出模的定义。">直接镜像其正面</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="quiz">
+        <p class="meta">回忆 2 / 3</p>
+        <p class="prompt">FDM 切片前，网格最关键的几何要求是？</p>
+        <div class="choices">
+          <button type="button" data-correct="true" data-why="对。要封闭、可区分内外——流形 / watertight。">成为封闭的流形</button>
+          <button type="button" data-correct="false" data-why="贴图好看不保证能切片。">贴图必须很清晰</button>
+          <button type="button" data-correct="false" data-why="面数多少次要；破洞的低模也打不了。">面数越多越好看</button>
+          <button type="button" data-correct="false" data-why="颜色与能否形成刀具路径无关。">必须带顶点颜色</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="quiz">
+        <p class="meta">回忆 3 / 3</p>
+        <p class="prompt">下面哪一句更接近摄影测量？</p>
+        <div class="choices">
+          <button type="button" data-correct="true" data-why="对。它从重叠照片里三角化可见表面，不是凭空生成类别先验。">多图重叠重建表面</button>
+          <button type="button" data-correct="false" data-why="那是文本生成 3D，不是摄影测量。">只输入一句描述词</button>
+          <button type="button" data-correct="false" data-why="单图前馈预测是 AI 出模一侧。">单图半秒预测网格</button>
+          <button type="button" data-correct="false" data-why="手雕不依赖照片对应。">在软件里徒手雕琢</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <p class="score" data-score>答完会在这里计分。</p>
+    </div>
+
+    <div class="ask">
+      <p><strong>带回老师一件具体事：</strong>你下一件想打的摆件是什么？你手上有几张照片（或能不能拍）？我会帮你选岔口，并指定下一课要练的「第一次出模」工具步骤。有不清楚的，直接问。</p>
+    </div>
+
+    <section class="source">
+      <p><strong>主文献：</strong>先读 Prusa 的短文 <a href="https://help.prusa3d.com/article/modeling-with-3d-printing-in-mind_164135">Modeling with 3D printing in mind</a>（流形 / 实心）。AI 侧机制看 <a href="https://stability.ai/news/triposr-3d-generation">TripoSR 发布说明</a> 或 <a href="https://arxiv.org/abs/2403.02151">论文摘要</a>。对照两条路径可用 <a href="https://higen3d.com/blog/ai-3d-vs-photogrammetry-2026">这篇 2026 对比</a>（工具推销部分保持怀疑）。</p>
+      <p>速查：<a href="../reference/pipeline-map.html">流水线地图</a>。</p>
+    </section>
+
+    <footer class="lesson-end">
+      <p>下一课大概率是：选一个工具完成「第一次出模」，并把文件丢进你的切片软件，读懂它报的第一批错误。</p>
+    </footer>
+  </article>
+  <script src="../assets/practice.js"></script>
+</body>
+</html>
