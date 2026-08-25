@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>第 02 课 · 第一次 AI 出模</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+  <article class="page">
+    <nav class="crumbs">
+      <a href="../../../index.html">校园</a>
+      ·
+      <a href="../index.html">本课</a>
+      ·
+      <a href="0001-photo-to-print-map.html">第 01 课</a>
+      ·
+      <a href="../reference/first-generate-checklist.html">速查：第一次出模</a>
+    </nav>
+
+    <header>
+      <p class="kicker">第 02 课 · 照片 → FDM</p>
+      <h1>第一次 AI 出模</h1>
+      <p class="lede">用你的头像立绘走 AI 岔路：生成网格 → 导出 STL → 丢进切片软件 → <strong>读报错，先别按打印</strong>。</p>
+    </header>
+
+    <p class="win">这节完成的标志只有一个：<strong>你手里有一份 STL，并且能说出切片软件对它抱怨了什么（或明确写「没有报错」）。</strong>漂亮预览不算完成。</p>
+
+    <h2>用哪张图</h2>
+    <p>就用你选过的那张：</p>
+    <div class="specimen">
+      <p class="label">素材</p>
+      <p><code>D:\BaiduSyncdisk\我的材料\个人材料\avatars\avatar6.jpg</code></p>
+      <p>白底正面立绘 → 适合 AI 出模；背面会由模型脑补。摄影测量这条路对它不适用。</p>
+    </div>
+
+    <h2>推荐工具</h2>
+    <div class="pair">
+      <article>
+        <h3>主路径：Meshy Image to 3D</h3>
+        <p>上手快，支持导出 STL，面向打印的文档多。免费账号通常够做第一次。<span class="sidenote">步骤综合自 Meshy 教程：<a href="https://www.meshy.ai/tutorials/image-to-3d-model-complete-guide">Image to 3D Guide</a>、<a href="https://www.meshy.ai/tutorials/photo-to-3d-printable-model">Photo to printable</a>。界面若改版，以网站实际按钮为准。</span></p>
+      </article>
+      <article>
+        <h3>备路径：TripoSR Demo</h3>
+        <p>开源单图重建演示，适合理解「它在预测」。导出后往往更糙，仍要进切片检查。<span class="sidenote"><a href="https://huggingface.co/spaces/stabilityai/TripoSR">HF Space</a>；论文 <a href="https://arxiv.org/abs/2403.02151">arXiv:2403.02151</a>。</span></p>
+      </article>
+    </div>
+    <p>这节默认走 Meshy。若你更想完全免费开源，用 TripoSR，步骤末尾同样：导出 → 切片 → 读报错。</p>
+
+    <h2>操作：对着网站点</h2>
+    <p>现在不要打第二件、不要开 Blender。按顺序做完下面五步即可。</p>
+    <ol class="steps">
+      <li>
+        <h3>打开 Image to 3D</h3>
+        <p>注册 / 登录 <a href="https://www.meshy.ai/">meshy.ai</a>，进入 <strong>Image to 3D</strong>（侧栏或功能页）。</p>
+      </li>
+      <li>
+        <h3>上传 avatar6.jpg</h3>
+        <p>选单图上传。若提示可选多视角而你只有这一张，就只用这一张继续——我们接受背面是预测。</p>
+      </li>
+      <li>
+        <h3>生成，可选用 Refine</h3>
+        <p>先出 Preview 也行。若有 <strong>Refine</strong> / 类似「细化、修面」选项，第一次建议开：商业文档称它有助于补洞，但仍不能代替你自己的切片检查。</p>
+      </li>
+      <li>
+        <h3>导出 STL</h3>
+        <p>在 Download 里选 <strong>STL</strong>（不是只下 GLB）。STL 是 FDM 切片最常见入口之一。记下文件名，例如 <code>avatar6.stl</code>。</p>
+      </li>
+      <li>
+        <h3>丢进你的切片软件，读报错</h3>
+        <p>Bambu Studio / Orca / PrusaSlicer / Cura 任一即可。导入后先看：</p>
+        <ul class="tight">
+          <li>有没有 non-manifold / 破面 / 修复提示？</li>
+          <li>预览里有没有乱飘的碎面、薄片？</li>
+          <li>默认尺寸是否离谱（巨大或指甲盖大）？先别急着打，记下毫米数。</li>
+        </ul>
+        <p><strong>不要按打印。</strong>这节的作业是「读懂抱怨」，不是「打出成品」。</p>
+      </li>
+    </ol>
+
+    <div class="analogy">
+      <p class="label">和第 01 课对齐</p>
+      <p>你现在停在流水线的第 3–4 步：出模 + 检查可打印性。第 5 步「修补」下一课再练。屏幕上转得好看 ≠ 切片认为它是封闭物体。</p>
+    </div>
+
+    <h2>练：确认你没走岔</h2>
+    <div class="practice">
+      <div class="quiz">
+        <p class="meta">回忆 1 / 3</p>
+        <p class="prompt">这张立绘第一次出模，应导出哪种文件去切片？</p>
+        <div class="choices">
+          <button type="button" data-correct="true" data-why="对。STL（或你切片软件直接吃的 3MF）是 FDM 常见入口。先保证几何进得去。">导出STL再导入</button>
+          <button type="button" data-correct="false" data-why="只看网页预览完不成「检查可打印性」。">只在网页里旋转</button>
+          <button type="button" data-correct="false" data-why="贴图包帮不了切片判断流形。">只要下载贴图包</button>
+          <button type="button" data-correct="false" data-why="还没到打印；先读报错。">直接发给打印机</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="quiz">
+        <p class="meta">回忆 2 / 3</p>
+        <p class="prompt">切片提示 non-manifold 时，这节正确反应是？</p>
+        <div class="choices">
+          <button type="button" data-correct="true" data-why="对。记下原文带回老师；修补是下一课。强行开打容易废件。">记下报错先停下</button>
+          <button type="button" data-correct="false" data-why="忽略流形问题常导致空壳或乱路径。">关掉提示强行打</button>
+          <button type="button" data-correct="false" data-why="换灯丝解决不了网格拓扑。">先去换一种耗材</button>
+          <button type="button" data-correct="false" data-why="加支撑修不了破洞与非流形边。">只加一堆支撑条</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="quiz">
+        <p class="meta">回忆 3 / 3</p>
+        <p class="prompt">单张正面立绘生成后，背面几何从哪来？</p>
+        <div class="choices">
+          <button type="button" data-correct="true" data-why="对。AI 按先验预测未见侧面；这正是第 01 课的岔口含义。">模型预测脑补来</button>
+          <button type="button" data-correct="false" data-why="你没有背面照片可供测量。">照片里量出来的</button>
+          <button type="button" data-correct="false" data-why="打印机不会生成几何。">切片时自动长出</button>
+          <button type="button" data-correct="false" data-why="还没有扫描数据。">激光扫描补上的</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <p class="score" data-score>答完会在这里计分。</p>
+    </div>
+
+    <div class="ask">
+      <p><strong>作业（贴回来就能进下一课）：</strong></p>
+      <ol class="tight">
+        <li>你用的工具名（Meshy / TripoSR / 其他）</li>
+        <li>切片软件名</li>
+        <li>它说了什么：把报错原文或截图描述贴上；若完全没有报错，写「无报错」，并告诉我导入后模型大概多大（毫米）</li>
+      </ol>
+      <p>卡在某一步就说卡在第几步。不要先打印。</p>
+    </div>
+
+    <section class="source">
+      <p><strong>主操作文档：</strong><a href="https://www.meshy.ai/tutorials/photo-to-3d-printable-model">Meshy: Photo to 3D Printable Model</a>。机制复习：<a href="https://stability.ai/news/triposr-3d-generation">TripoSR 说明</a>。可打印性：<a href="https://help.prusa3d.com/article/modeling-with-3d-printing-in-mind_164135">Prusa — Modeling with 3D printing in mind</a>。</p>
+      <p>上一课：<a href="0001-photo-to-print-map.html">照片到打印的地图</a>。速查：<a href="../reference/first-generate-checklist.html">第一次出模清单</a>。</p>
+    </section>
+
+    <footer class="lesson-end">
+      <p>下一课取决于你贴回的报错：有破洞就练修补；若意外很干净，就练定尺与摆姿态。</p>
+    </footer>
+  </article>
+  <script src="../assets/practice.js"></script>
+</body>
+</html>
