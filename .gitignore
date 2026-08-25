@@ -4,3 +4,8 @@ Thumbs.db
 .grok/
 .idea/
 .vscode/
+
+# Local TripoSR checkout + venv + generated meshes (large)
+topics/photo-to-print/TripoSR-main/
+topics/**/TripoSR*/
+**/output/
