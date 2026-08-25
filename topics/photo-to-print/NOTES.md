@@ -3,7 +3,8 @@
 - Language: Chinese lessons.
 - Printer: FDM (Bambu / Prusa / Creality-class).
 - First targets: figurines / ornaments / organic shapes — not precision fit parts.
-- Tool preference: user asked for the most stable path; recommend a commercial multi-view AI for the first win, teach photogrammetry as the accurate alternative, always end in repair + slicer check.
+- Tool preference: user wants free; has NVIDIA GPU (~6GB+). Default = local TripoSR (MIT). Meshy / Tripo Studio = paid web products — do not present as free. HF Space may rate-limit; local run is the real free path.
+- Correction (2026-08): earlier lesson overstated “free web tools”; fixed lesson 02 to lead with local TripoSR.
 - Prior skill: already prints others’ models — slicing/printing basics exist; modeling and mesh repair do not.
 - Do not start with Blender sculpting from zero; the mission is photo-assisted generation then adjust.
 - First practice image: `D:\BaiduSyncdisk\我的材料\个人材料\avatars\avatar6.jpg` — front stylized illustration, white BG; AI path only; back will be invented.

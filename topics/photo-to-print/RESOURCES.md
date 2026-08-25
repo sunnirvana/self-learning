@@ -15,7 +15,11 @@
 - [Article: Photo to 3D methods overview — FacFox](https://facfox.com/docs/kb/how-to-create-a-3d-model-from-photos-and-images)
   Table of goals → methods (single-image AI, multi-view AI, photogrammetry). Use for: quick path selection for figurines vs fit parts.
 - [Product docs: Meshy Image-to-3D](https://www.meshy.ai/)
-  Commercial multi-image / image-to-3D with print-oriented claims. Use for: a low-friction first generation; always verify manifold in your slicer, don’t trust marketing alone.
+  Commercial web image-to-3D (paid / limited free credits). Optional convenience only — not the default for this course.
+- [Microsoft TRELLIS](https://github.com/microsoft/TRELLIS)
+  Stronger open image-to-3D (MIT); heavier install. Use later if TripoSR quality is not enough and the GPU can take it.
+- [Tencent Hunyuan3D-2](https://github.com/Tencent-Hunyuan/Hunyuan3D-2)
+  Another major open image-to-3D line for local runs. Use as alternate free path after TripoSR basics.
 
 ## Wisdom (Communities)
 

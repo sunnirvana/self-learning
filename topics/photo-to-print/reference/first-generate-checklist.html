@@ -21,17 +21,17 @@
     </header>
 
     <ol class="tight">
-      <li>Meshy → Image to 3D（或 TripoSR Demo）</li>
-      <li>上传 <code>avatar6.jpg</code>（单图即可）</li>
-      <li>生成；有 Refine 可开</li>
-      <li>Download → <strong>STL</strong></li>
-      <li>导入 Bambu / Orca / Prusa / Cura</li>
+      <li>本地 clone <a href="https://github.com/VAST-AI-Research/TripoSR">TripoSR</a>（MIT，免费）</li>
+      <li><code>pip install -r requirements.txt</code>（PyTorch 需匹配 CUDA）</li>
+      <li><code>python run.py avatar6.jpg --output-dir output/</code>（约 6GB 显存）</li>
+      <li>把输出网格导入切片软件（必要时先转 STL）</li>
       <li>记录：报错原文，或「无报错 + 尺寸 mm」</li>
+      <li>不要打印；不要和付费的 Tripo Studio / Meshy 网页搞混</li>
     </ol>
 
     <p class="win">背面是预测的。流形检查比网页预览重要。</p>
 
-    <p>文档：<a href="https://www.meshy.ai/tutorials/photo-to-3d-printable-model">Meshy printable guide</a> · <a href="https://help.prusa3d.com/article/modeling-with-3d-printing-in-mind_164135">Prusa manifold</a></p>
+    <p>文档：<a href="https://github.com/VAST-AI-Research/TripoSR">TripoSR README</a> · <a href="https://help.prusa3d.com/article/modeling-with-3d-printing-in-mind_164135">Prusa manifold</a></p>
   </article>
 </body>
 </html>
