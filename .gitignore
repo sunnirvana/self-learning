@@ -9,3 +9,6 @@ Thumbs.db
 topics/photo-to-print/TripoSR-main/
 topics/**/TripoSR*/
 **/output/
+
+topics/photo-to-print/*.zip
+*.zip
