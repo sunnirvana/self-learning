@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>第 03 课 · 第一次谨慎上机</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+  <article class="page">
+    <nav class="crumbs">
+      <a href="../../../index.html">校园</a>
+      ·
+      <a href="../index.html">本课</a>
+      ·
+      <a href="0002-first-ai-generate.html">第 02 课</a>
+      ·
+      <a href="../reference/first-print-checklist.html">速查：试打</a>
+    </nav>
+
+    <header>
+      <p class="kicker">第 03 课 · 照片 → FDM</p>
+      <h1>第一次谨慎上机</h1>
+      <p class="lede">切片已经干净通过。下一关不是「修破洞」，而是<strong>定尺、摆正、加支撑，打一件小的验证件</strong>——接受它可能丑，但要能站稳、能拆支撑。</p>
+    </header>
+
+    <p class="win">完成标志：你打出一件实体（哪怕只有 40–60mm 高），能站立，支撑能拆掉，并拍一张照片带回老师。好看与否先排第二。</p>
+
+    <h2>你现在的位置</h2>
+    <p>流水线第 3–4 步已经过了：出模 + 切片检查。无报错说明<strong>不必强行修补</strong>。效果一般，多半是生成质量（单图脑补），不是切片失败。真实打印会告诉你哪里糊、哪里脆。</p>
+
+    <h2>上机前三件事</h2>
+    <ol class="steps">
+      <li>
+        <h3>定真实毫米</h3>
+        <p>AI 网格单位通常不是「真人比例」。在切片软件里把模型<strong>高度</strong>设到一个明确数：试打建议 <strong>40–60 mm</strong>（省料、省时间）；满意后再打 80–120 mm。</p>
+      </li>
+      <li>
+        <h3>选姿态：大底面贴床</h3>
+        <p>原则：尽量减少悬空起点（岛屿），底面越平越好贴床。贴床那一面最光滑；靠支撑的那一面会糙。<span class="sidenote">Prusa：<a href="https://help.prusa3d.com/article/object-orientation_1658">Object orientation</a>、<a href="https://help.prusa3d.com/article/modeling-with-3d-printing-in-mind_164135">Modeling with 3D printing in mind</a>。</span></p>
+        <p>你的头像立绘：脚 / 裙摆朝下通常比头朝下稳。旋转到「能站住」之后，用「放置到面」类工具让底面真正贴床。</p>
+      </li>
+      <li>
+        <h3>支撑：手办优先树状 / 有机</h3>
+        <p>开启自动支撑。若切片软件有 <strong>Organic / Tree</strong> 树状支撑，手办摆件优先用它：接触点少、好拆、伤表面较少。<span class="sidenote">Prusa：<a href="https://help.prusa3d.com/article/organic-supports_480131">Organic supports</a>；同类选项在 Bambu / Orca 里常叫 Tree。</span></p>
+        <p>第一层粘床不稳时，给模型加 <strong>Brim</strong>（裙边），不要一上来就 Raft，除非你很熟。</p>
+      </li>
+    </ol>
+
+    <h2>建议的第一盘参数（起点，不是教条）</h2>
+    <div class="specimen">
+      <p class="label">试打配置</p>
+      <ul class="tight">
+        <li>材料：你最熟的 PLA（或平时打手办的料）</li>
+        <li>层高：0.2 mm（先稳，不追细节）</li>
+        <li>填充：10–15%</li>
+        <li>壁：2–3 圈</li>
+        <li>支撑：Everywhere 或自动 + Tree/Organic（若有）</li>
+        <li>高度：40–60 mm</li>
+      </ul>
+    </div>
+
+    <h2>打完看什么</h2>
+    <ul class="tight">
+      <li>能不能站稳？底面有没有翘？</li>
+      <li>支撑好不好拆？脸上有没有严重拉丝疤？</li>
+      <li>哪些细节糊成一团（发丝、飘带）——记下来，那是以后换多视角 / 更好模型要解决的</li>
+    </ul>
+
+    <div class="analogy">
+      <p class="label">和第 01–02 课对齐</p>
+      <p>单图 AI 的「一般」会在实物上更明显。试打的价值是反馈，不是出货。若试打成功，再放大尺寸或换更强开源模型；若失败，把切片预览 + 失败照片贴回来，再决定要不要修网格或加底座。</p>
+    </div>
+
+    <h2>练：上机前判断</h2>
+    <div class="practice">
+      <div class="quiz">
+        <p class="meta">回忆 1 / 3</p>
+        <p class="prompt">切片已无报错时，第一次试打高度更合理的是？</p>
+        <div class="choices">
+          <button type="button" data-correct="true" data-why="对。小件验证姿态与支撑，省料省时。满意后再放大。">四十到六十毫米</button>
+          <button type="button" data-correct="false" data-why="太大：失败成本高，细节问题还没验证。">两百毫米打全身</button>
+          <button type="button" data-correct="false" data-why="原单位常无意义，不能当毫米用。">保持导出原尺寸</button>
+          <button type="button" data-correct="false" data-why="过小难观察姿态与支撑拆卸。">五毫米迷你颗粒</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="quiz">
+        <p class="meta">回忆 2 / 3</p>
+        <p class="prompt">手办摆件选姿态时，优先考虑什么？</p>
+        <div class="choices">
+          <button type="button" data-correct="true" data-why="对。大底面贴床、减少悬空岛屿，比「正面朝相机」更重要。">底面贴床更稳定</button>
+          <button type="button" data-correct="false" data-why="好看朝向可以后调；先保证能打下来。">必须正面朝镜头</button>
+          <button type="button" data-correct="false" data-why="头朝下往往接触差、支撑多。">头朝下贴住热床</button>
+          <button type="button" data-correct="false" data-why="悬空越多越依赖支撑、表面越糙。">悬空越多越理想</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="quiz">
+        <p class="meta">回忆 3 / 3</p>
+        <p class="prompt">这类有机造型，支撑风格更优先选？</p>
+        <div class="choices">
+          <button type="button" data-correct="true" data-why="对。树状 / Organic 接触少、好拆，适合手办。">树状有机支撑</button>
+          <button type="button" data-correct="false" data-why="密实栅格更伤表面、更费料，不是第一选择。">全满密实栅格</button>
+          <button type="button" data-correct="false" data-why="完全无支撑容易塌。">完全不要支撑</button>
+          <button type="button" data-correct="false" data-why="整盘 Raft 通常不是第一选择。">整盘厚筏开打</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <p class="score" data-score>答完会在这里计分。</p>
+    </div>
+
+    <div class="ask">
+      <p><strong>作业：</strong>按上面打一盘 40–60 mm 试件。打完贴：① 切片里最终高度；② 用了哪种支撑；③ 一张实物照片；④ 一句「最不满意的地方」。有不清楚的，直接问。</p>
+    </div>
+
+    <section class="source">
+      <p><strong>主文献：</strong><a href="https://help.prusa3d.com/article/object-orientation_1658">Object orientation</a> · <a href="https://help.prusa3d.com/article/organic-supports_480131">Organic supports</a> · <a href="https://help.prusa3d.com/article/support-material_1698">Support material</a>。Bambu / Orca 用户把 Organic 对应到 Tree 即可。</p>
+      <p>上一课：<a href="0002-first-ai-generate.html">第一次 AI 出模</a>。速查：<a href="../reference/first-print-checklist.html">试打清单</a>。</p>
+    </section>
+  </article>
+  <script src="../assets/practice.js"></script>
+</body>
+</html>

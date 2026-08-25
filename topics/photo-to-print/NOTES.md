@@ -9,4 +9,5 @@
 - Do not start with Blender sculpting from zero; the mission is photo-assisted generation then adjust.
 - First practice image: `D:\BaiduSyncdisk\我的材料\个人材料\avatars\avatar6.jpg` — front stylized illustration, white BG; AI path only; back will be invented.
 - Lesson 02: generate STL in Meshy (or TripoSR), import to slicer, read errors, do not print yet.
-- 2026-08-25: local TripoSR succeeded on avatar6; user says quality is mediocre but mesh exists. Stuck point now: slicer check + scale, then repair lesson.
+- 2026-08-25: local TripoSR succeeded on avatar6; user says quality is mediocre but mesh exists.
+- 2026-08-25 later: slicer import clean — no errors, can stand after rotate, supports OK, plate slices fine. Skip mandatory repair; next = first cautious print (scale/orientation/supports).
