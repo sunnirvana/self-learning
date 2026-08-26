@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>第 06 课 · 侧视图再重生</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+  <article class="page">
+    <nav class="crumbs">
+      <a href="../../../index.html">校园</a>
+      ·
+      <a href="../index.html">本课</a>
+      ·
+      <a href="0005-add-base-in-slicer.html">第 05 课</a>
+    </nav>
+
+    <header>
+      <p class="kicker">第 06 课 · 照片 → FDM</p>
+      <h1>侧视图再重生</h1>
+      <p class="lede">底座解决了「站」。脸糊、背面怪，是因为第一张只有正面——模型在猜。这节先<strong>备齐视角</strong>，再谈第二次出模。</p>
+    </header>
+
+    <p class="win">完成标志：你手里有同一角色的 <strong>front / left / right</strong>（最好再加 <strong>back</strong>）白底图，比例一致。有了这些，下一课再本地跑多视角模型；没有侧视图就硬重生，背面照样猜。</p>
+
+    <h2>为什么底座救不了脸和背</h2>
+    <p>TripoSR 是<strong>单图</strong>前馈：只看见正面，侧面与背面按训练先验填。<span class="sidenote"><a href="https://arxiv.org/abs/2403.02151">TripoSR</a>；对比多视角：Hunyuan3D-2mv 等吃 front/left/right/back。<a href="https://github.com/Tencent-Hunyuan/Hunyuan3D-2">Hunyuan3D-2</a></span></p>
+    <p>你已经验证：加底座 → 更稳。现在丑点主因是<strong>缺信息</strong>，不是切片。</p>
+
+    <h2>先做参考图，再装新模型</h2>
+    <ol class="steps">
+      <li>
+        <h3>固定角色设定</h3>
+        <p>同一套衣服、发型、比例。不要这一张换装、那一张换脸。</p>
+      </li>
+      <li>
+        <h3>四张标准视角（最低三张）</h3>
+        <ul class="tight">
+          <li><strong>front</strong>：你已有的 avatar6（可再用）</li>
+          <li><strong>left</strong>：正左侧，全身入镜</li>
+          <li><strong>right</strong>：正右侧</li>
+          <li><strong>back</strong>（强烈建议）：正背</li>
+        </ul>
+        <p>白底或纯色底；角色大致同高、同站姿（A-pose / 站立均可，但四张要统一）。</p>
+      </li>
+      <li>
+        <h3>图从哪来</h3>
+        <p>任选：自己画；用文生图 / 图生图「同一角色 left side view white background」；或角色设定 sheet 裁成四张。关键是<strong>身份一致</strong>，不是画功。</p>
+      </li>
+      <li>
+        <h3>命名存好</h3>
+        <p>例如放到一个文件夹：</p>
+        <div class="specimen">
+          <p class="label">建议命名</p>
+          <p><code>front.png</code> · <code>left.png</code> · <code>right.png</code> · <code>back.png</code></p>
+        </div>
+      </li>
+      <li>
+        <h3>先别急着装 Hunyuan</h3>
+        <p>多视角本地模型（如 Hunyuan3D-2mv）更重，装错一堆时间会耗在环境上。这节作业只交四张图；确认齐了，下一课再一起装并出第二版网格。</p>
+      </li>
+    </ol>
+
+    <div class="analogy">
+      <p class="label">轻量备选（只有一张新图时）</p>
+      <p>若暂时画不出侧面：至少做一张<strong>四分之三侧</strong>全身白底图，再用 TripoSR 跑一版对比。比纯正面往往好一点，但仍不如真正的左右背。</p>
+    </div>
+
+    <h2>练</h2>
+    <div class="practice">
+      <div class="quiz">
+        <p class="meta">回忆 1 / 3</p>
+        <p class="prompt">脸糊、背面怪，在信息上缺的是什么？</p>
+        <div class="choices">
+          <button type="button" data-correct="true" data-why="对。单正面没有侧面/背面像素，模型只能猜。">侧面背面的像素</button>
+          <button type="button" data-correct="false" data-why="底座已解决站立，不是脸糊主因。">更厚的塑料底座</button>
+          <button type="button" data-correct="false" data-why="耗材颜色不提供几何信息。">另一种颜色耗材</button>
+          <button type="button" data-correct="false" data-why="切片无报错说明流形已够打。">必须再去修流形</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="quiz">
+        <p class="meta">回忆 2 / 3</p>
+        <p class="prompt">多视角重生前，四张图最重要的一致性是？</p>
+        <div class="choices">
+          <button type="button" data-correct="true" data-why="对。同一角色、比例、服装、站姿，标签才能对上真实方位。">同一角色同站姿</button>
+          <button type="button" data-correct="false" data-why="四张都用不同服装会让模型精神分裂。">每张都换一套装</button>
+          <button type="button" data-correct="false" data-why="背景花哨干扰去背与轮廓。">背景越花哨越好</button>
+          <button type="button" data-correct="false" data-why="左右标签反了会扭曲。">左右标签可随便</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="quiz">
+        <p class="meta">回忆 3 / 3</p>
+        <p class="prompt">这节作业交什么才算完成？</p>
+        <div class="choices">
+          <button type="button" data-correct="true" data-why="对。先备齐视角文件；装多视角模型放下一课。">齐套视角参考图</button>
+          <button type="button" data-correct="false" data-why="还没要求立刻装 Hunyuan。">必须装好新模型</button>
+          <button type="button" data-correct="false" data-why="第三件实物不是本课硬门槛。">必须打完第三件</button>
+          <button type="button" data-correct="false" data-why="删底座会丢掉已有站立收益。">删掉现有的底座</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <p class="score" data-score>答完会在这里计分。</p>
+    </div>
+
+    <div class="ask">
+      <p><strong>作业：</strong>准备 front / left / right（+ back 更好），白底，同一站姿。做好后告诉我文件路径或把图丢进对话。我再带你跑多视角重生（免费本地）。卡在「怎么做出侧视图」就说你更想手绘还是 AI 出设定图。</p>
+    </div>
+
+    <section class="source">
+      <p>单图极限：<a href="https://stability.ai/news/triposr-3d-generation">TripoSR</a>。多视角方向：<a href="https://github.com/Tencent-Hunyuan/Hunyuan3D-2">Hunyuan3D-2 / 2mv</a>（装法下一课再做）。</p>
+    </section>
+  </article>
+  <script src="../assets/practice.js"></script>
+</body>
+</html>

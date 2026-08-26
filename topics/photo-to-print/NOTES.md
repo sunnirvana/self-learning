@@ -14,4 +14,4 @@
 - 2026-08-26: first physical print done; user says ugly but real. Mission “photo→print once” achieved.
 - Ugliness (user): face mush, weird sides/back, hair/folds/ribbons mush, unstable/rough bottom/support scars.
 - 2026-08-26: user asked next lesson via ask-matt; base homework not done → lesson 05 operational add-base in slicer.
-- 2026-08-26 later: second print with base done. Print-side base practice complete. Next: multi-view / side refs for face & back, or support-scar tuning.
+- 2026-08-26 later: second print with base done. Stable now; user still most bothered by face and back → lesson 06 multi-view / side refs regen.
