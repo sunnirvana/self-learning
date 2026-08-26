@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>第 05 课 · 切片里加底座</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+  <article class="page">
+    <nav class="crumbs">
+      <a href="../../../index.html">校园</a>
+      ·
+      <a href="../index.html">本课</a>
+      ·
+      <a href="0004-why-ugly-and-base.html">第 04 课</a>
+    </nav>
+
+    <header>
+      <p class="kicker">第 05 课 · 照片 → FDM</p>
+      <h1>切片里加底座</h1>
+      <p class="lede">第 04 课说了「先改打印侧」。这节只做一件事：在切片软件里给 <code>mesh.stl</code> 加一个圆柱底座，合并后重新切片。不换模型、不开 Blender。</p>
+    </header>
+
+    <p class="win">完成标志：预览里人物脚下有一块完整底座，整件当作<strong>一个物体</strong>切片，且仍无报错。打不打由你；先把预览截图贴回来也算过关。</p>
+
+    <h2>用哪个文件</h2>
+    <div class="specimen">
+      <p class="label">素材</p>
+      <p><code>topics\photo-to-print\TripoSR-main\output\avatar6\0\mesh.stl</code></p>
+      <p>先缩放到你习惯的试打高度（如 50–80 mm），再加底座。</p>
+    </div>
+
+    <h2>Bambu Studio / Orca（推荐路径）</h2>
+    <p>名称以你版本为准：有的叫「组合 / Merge」，有的仍显示「装配」。官方说明见 Bambu Wiki 的 <a href="https://wiki.bambulab.com/en/software/bambu-studio/stacking-objects">Merge / Stack</a> 与 <a href="https://wiki.bambulab.com/en/bambu-studio/assemble-tool">Assemble</a>；布尔并集见论坛与教程中的 <strong>Mesh Boolean → Union</strong>。</p>
+    <ol class="steps">
+      <li>
+        <h3>导入并放正</h3>
+        <p>导入 STL → 旋转到脚朝下 → 缩放到目标高度 → 用「放置到面」让底贴床。</p>
+      </li>
+      <li>
+        <h3>添加圆柱</h3>
+        <p>在热床空白处<strong>右键 → Add Primitive → Cylinder</strong>。取消等比缩放：XY 直径比裙摆略大（例如人物投影宽 40 mm 就用 48–55 mm），Z 厚度 <strong>2–4 mm</strong>。</p>
+      </li>
+      <li>
+        <h3>对齐到脚下</h3>
+        <p><strong>推荐：</strong>在对象列表里对人物右键 <strong>Add part → Cylinder</strong>（若有），圆柱会成为同一物体下的 part，可在 Z 向微调，脚底嵌入底座 0.5–1 mm。</p>
+        <p><strong>或：</strong>圆柱作为独立对象添加后，Ctrl 点选人物 + 圆柱 → 右键 <strong>Merge / 组合</strong>，再移动 part 对齐。</p>
+      </li>
+      <li>
+        <h3>真正熔成一体（重要）</h3>
+        <p>仅 Merge 有时仍是「装配体」，切片可能当两件。选中装配后打开工具栏 <strong>Mesh Boolean</strong>，选 <strong>Union / 并集</strong>，变成单个网格。<span class="sidenote">Bambu 文档：装配后用布尔并集才能完全合并。</span></p>
+      </li>
+      <li>
+        <h3>再切片检查</h3>
+        <p>预览层层往下看：底座应是实心盘，脚踝处与底座相连，没有裂缝。支撑优先 Tree/Organic；可加 Brim。</p>
+      </li>
+    </ol>
+
+    <h2>PrusaSlicer 备注</h2>
+    <p>右键热床 → Add Shape → Cylinder；缩放后与模型对齐；多选 → 右键 Merge；若仍是分开的外壳，用 PrusaSlicer 的网格布尔 / 到 Blender 并集后再导入。原则相同：<strong>一个连通物体 + 大底面贴床</strong>。</p>
+
+    <div class="analogy">
+      <p class="label">怎样算加对了</p>
+      <p>预览里从底往上看，第一层是完整圆盘；人物脚踝「长在」圆盘上，不是悬浮。若脚踝和底座之间有空气缝，还要再往下嵌一点或做并集。</p>
+    </div>
+
+    <h2>练</h2>
+    <div class="practice">
+      <div class="quiz">
+        <p class="meta">回忆 1 / 3</p>
+        <p class="prompt">加底座时，圆柱厚度第一次比较合适的是？</p>
+        <div class="choices">
+          <button type="button" data-correct="true" data-why="对。2–4 mm 够稳、省料；试打不必做厚碑座。">两到四毫米厚</button>
+          <button type="button" data-correct="false" data-why="太厚，浪费时间和材料。">二十毫米厚座</button>
+          <button type="button" data-correct="false" data-why="薄如纸易翘、难粘床。">零点一毫米膜</button>
+          <button type="button" data-correct="false" data-why="高度应接近人物高度，不是底座。">与人同高圆柱</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="quiz">
+        <p class="meta">回忆 2 / 3</p>
+        <p class="prompt">Merge 之后仍像两件物体时，下一步更合理的是？</p>
+        <div class="choices">
+          <button type="button" data-correct="true" data-why="对。Mesh Boolean 并集把外壳熔成一个连通网格。">做网格布尔并</button>
+          <button type="button" data-correct="false" data-why="换耗材解决不了两件分离。">先换一种耗材</button>
+          <button type="button" data-correct="false" data-why="加密支撑修不了裂缝。">只去加密支撑</button>
+          <button type="button" data-correct="false" data-why="删底座等于放弃本课目标。">删掉圆柱底座</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="quiz">
+        <p class="meta">回忆 3 / 3</p>
+        <p class="prompt">脚踝和底座之间有空气缝，说明什么？</p>
+        <div class="choices">
+          <button type="button" data-correct="true" data-why="对。还没嵌进或未并集，打印后可能断开。">还没连成一体</button>
+          <button type="button" data-correct="false" data-why="有缝不代表流形报错已消失。">一定没有报错</button>
+          <button type="button" data-correct="false" data-why="缝越大越不连。">缝越大越牢固</button>
+          <button type="button" data-correct="false" data-why="冷却风扇与几何缝无关。">风扇开太大了</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <p class="score" data-score>答完会在这里计分。</p>
+    </div>
+
+    <div class="ask">
+      <p><strong>作业：</strong>完成加底座并切片。贴：① 用的软件（Bambu / Orca / Prusa…）；② 底座直径和厚度；③ 预览截图（能看出脚下有盘）。卡在「找不到 Merge / Boolean」就说你的软件全名和版本。</p>
+    </div>
+
+    <section class="source">
+      <p><strong>主文献：</strong><a href="https://wiki.bambulab.com/en/software/bambu-studio/stacking-objects">Bambu Studio — Merge / stack models</a> · <a href="https://wiki.bambulab.com/zh/bambu-studio/assemble-tool">装配工具（中文）</a>。姿态复习：<a href="https://help.prusa3d.com/article/object-orientation_1658">Object orientation</a>。</p>
+      <p>上一课：<a href="0004-why-ugly-and-base.html">丑在哪、先改哪</a>。</p>
+    </section>
+  </article>
+  <script src="../assets/practice.js"></script>
+</body>
+</html>

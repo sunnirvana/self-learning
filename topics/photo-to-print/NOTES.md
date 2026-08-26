@@ -12,4 +12,5 @@
 - 2026-08-25: local TripoSR succeeded on avatar6; user says quality is mediocre but mesh exists.
 - 2026-08-25 later: slicer import clean — no errors, can stand after rotate, supports OK, plate slices fine. Skip mandatory repair; next = first cautious print (scale/orientation/supports).
 - 2026-08-26: first physical print done; user says ugly but real. Mission “photo→print once” achieved.
-- Ugliness (user): face mush, weird sides/back, hair/folds/ribbons mush, unstable/rough bottom/support scars. Next: base first (print-side), then multi-view regen for face/sides.
+- Ugliness (user): face mush, weird sides/back, hair/folds/ribbons mush, unstable/rough bottom/support scars.
+- 2026-08-26: user asked next lesson via ask-matt; base homework not done → lesson 05 operational add-base in slicer.
