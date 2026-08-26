@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>第 04 课 · 丑在哪、先改哪</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+  <article class="page">
+    <nav class="crumbs">
+      <a href="../../../index.html">校园</a>
+      ·
+      <a href="../index.html">本课</a>
+      ·
+      <a href="0003-first-cautious-print.html">第 03 课</a>
+    </nav>
+
+    <header>
+      <p class="kicker">第 04 课 · 照片 → FDM</p>
+      <h1>丑在哪、先改哪</h1>
+      <p class="lede">第一件能打出来却丑，很正常。把丑点拆成两类：<strong>打印侧能改的</strong>，和<strong>必须重新出模才改得好的</strong>。这节先拿稳底座这一刀。</p>
+    </header>
+
+    <p class="win">带走：能把自己的丑点归类；并在切片软件里给模型加一个简单圆柱 / 方底座再切片。下一件至少更站得住、底面更干净。</p>
+
+    <h2>你点名的四处，分别意味着什么</h2>
+    <div class="pair">
+      <article>
+        <h3>要重生才治得好</h3>
+        <dl>
+          <dt>脸 / 五官糊</dt>
+          <dd>单图分辨率与模型能力上限。可补清晰大脸特写、换更强开源模型。</dd>
+          <dt>背面 / 侧面怪</dt>
+          <dd>立绘没有侧背面信息，AI 在猜。要侧面、背面参考图（多视角）或实物摄影测量。</dd>
+          <dt>发丝、衣褶、飘带糊</dt>
+          <dd>细长结构 + FDM 层高 + AI 网格三者叠加。可略加粗结构后再出模，或接受后处理打磨。</dd>
+        </dl>
+      </article>
+      <article>
+        <h3>打印侧就能改</h3>
+        <dl>
+          <dt>站不稳</dt>
+          <dd>加底座、加大贴床面积、略加大底面填充。</dd>
+          <dt>底面糙</dt>
+          <dd>贴床面其实最平；糙往往来自支撑接触面。改姿态或加平整底座当「牺牲面」。</dd>
+          <dt>支撑疤重</dt>
+          <dd>改用 Tree/Organic、增大支撑 Z 间隙、减少接触密度；脸朝外少挨支撑。</dd>
+        </dl>
+      </article>
+    </div>
+
+    <blockquote>
+      单图 AI 负责「有个形状」；多视角 / 更好模型负责「更像」；底座和支撑负责「站得住、疤少一点」。
+    </blockquote>
+
+    <h2>这节只练：加底座</h2>
+    <p>不换模型也能立刻改善站立与底面。任选一种你切片软件里最快的办法：</p>
+    <ol class="steps">
+      <li>
+        <h3>放正模型</h3>
+        <p>脚朝下，底面尽量水平贴床。</p>
+      </li>
+      <li>
+        <h3>加一个简单底座</h3>
+        <p>在切片软件里添加圆柱或方块 primitive，放到脚底下方并略嵌入脚底 0.5–1 mm（或紧贴后「合并 / 组装」）。直径比裙摆略大一圈。</p>
+        <p>若你的切片软件不好加实体：用 Bambu/Orca 的「添加负零件」的反操作——加正零件；或下一课再用 Blender 布尔并出新 STL。</p>
+      </li>
+      <li>
+        <h3>支撑与裙边</h3>
+        <p>仍用 Tree/Organic。有底座后，尽量让支撑主要长在底座上而不是脸上。粘床加 Brim。</p>
+      </li>
+      <li>
+        <h3>高度</h3>
+        <p>第二件可以仍是 50–80 mm；底座厚度 2–4 mm 足够试。</p>
+      </li>
+    </ol>
+
+    <div class="analogy">
+      <p class="label">重生暂时怎么准备</p>
+      <p>若你愿意拍 / 画：再准备<strong>同一角色的左侧、右侧各一张</strong>（白底更好）。有了侧视图，下一课再谈多视角出模。现在没有也没关系——先把带底座的第二件打出来。</p>
+    </div>
+
+    <h2>练</h2>
+    <div class="practice">
+      <div class="quiz">
+        <p class="meta">回忆 1 / 3</p>
+        <p class="prompt">「背面怪」主要该用哪类办法？</p>
+        <div class="choices">
+          <button type="button" data-correct="true" data-why="对。缺侧面信息就只能重生时补参考，加底座治不好背面造型。">补侧面再出模</button>
+          <button type="button" data-correct="false" data-why="底座只改善站立与底面，不创造正确背面。">只加厚其底座</button>
+          <button type="button" data-correct="false" data-why="换颜色改不了几何。">换成红色耗材</button>
+          <button type="button" data-correct="false" data-why="加密填充不修复脑补错误。">填充打满百分</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="quiz">
+        <p class="meta">回忆 2 / 3</p>
+        <p class="prompt">站不稳、底面糙，最先试的打印侧动作是？</p>
+        <div class="choices">
+          <button type="button" data-correct="true" data-why="对。平整底座增加贴床面积，也把糙面留在可牺牲的底。">加平整大底座</button>
+          <button type="button" data-correct="false" data-why="立刻换模型成本高；先拿稳打印侧收益。">马上换新模型</button>
+          <button type="button" data-correct="false" data-why="关掉冷却通常无助于站立。">关掉所有冷却</button>
+          <button type="button" data-correct="false" data-why="喷嘴更大解决不了底面积。">换成更大喷嘴</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <div class="quiz">
+        <p class="meta">回忆 3 / 3</p>
+        <p class="prompt">脸糊、飘带糊，和「切片报错」的关系是？</p>
+        <div class="choices">
+          <button type="button" data-correct="true" data-why="对。你已无报错；糊是观感/分辨率问题，不是流形失败。">无关属观感问题</button>
+          <button type="button" data-correct="false" data-why="切片干净说明几何可打，不等于细节好看。">说明必须修流形</button>
+          <button type="button" data-correct="false" data-why="支撑疤是另一类问题。">等于支撑全失败</button>
+          <button type="button" data-correct="false" data-why="机器校准不是这张立绘糊的主因。">等于热床未调平</button>
+        </div>
+        <p class="feedback" hidden></p>
+      </div>
+
+      <p class="score" data-score>答完会在这里计分。</p>
+    </div>
+
+    <div class="ask">
+      <p><strong>作业：</strong>给现有 STL 加底座再打一盘（或只切片预览也行）。贴：① 底座大概直径和厚度；② 预览截图或实物图；③ 若有侧视图参考，说一声有几张。不清楚的直接问。</p>
+    </div>
+
+    <section class="source">
+      <p>姿态与支撑复习：<a href="https://help.prusa3d.com/article/object-orientation_1658">orientation</a> · <a href="https://help.prusa3d.com/article/organic-supports_480131">organic supports</a>。生成侧机制仍见 <a href="https://arxiv.org/abs/2403.02151">TripoSR</a>：单图会预测未见侧面。</p>
+    </section>
+  </article>
+  <script src="../assets/practice.js"></script>
+</body>
+</html>

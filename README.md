@@ -10,7 +10,7 @@
 
 | 课 | 使命 | 进度 |
 |---|---|---|
-| [照片到 FDM 可打印模型](topics/photo-to-print/) | 照片出模 → 修补 → 在家用 FDM 打出手办 / 摆件 | 已打出第一件；待改进观感 |
+| [照片到 FDM 可打印模型](topics/photo-to-print/) | 照片出模 → 修补 → 在家用 FDM 打出手办 / 摆件 | 第 04 课：归类丑点 + 加底座 |
 | [用战略式编程的眼光使用 Agent](topics/agent-strategic-programming/) | 一次 agent 工作优化的是当前答卷，还是以后更好改的系统 | 第 03 课。下一步：抽出产品设计方法，写入 [`methods/`](methods/) |
 
 ## 方法库
