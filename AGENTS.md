@@ -21,3 +21,11 @@ Campus layout and GitHub habits: [CAMPUS.md](CAMPUS.md). Course map: [README.md]
 
 - `topics/photo-to-print/` — photo → mesh → repair → FDM figurine/ornament. Active when user asks about 3D printing / modeling from photos.
 - `topics/agent-strategic-programming/` — tactical vs strategic programming for agents. Next: extract product-design method into `methods/`.
+
+## Cursor Cloud specific instructions
+
+Static HTML campus. No package manager, lockfile, build, or test runner. Python 3 from the base image is enough.
+
+- Preview from the repo root: `python3 -m http.server 8000 --bind 0.0.0.0`. Open `http://127.0.0.1:8000/`.
+- Hello-world: the campus home lists both courses. A lesson such as `topics/agent-strategic-programming/lessons/0001-tactical-vs-strategic-programming.html` scores a practice item after a choice is clicked (`assets/practice.js`).
+- GitHub Pages publishes the repo root from `main` (`.github/workflows/pages.yml`). `.nojekyll` keeps underscore paths such as `_template/` on Pages.
